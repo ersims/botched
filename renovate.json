@@ -1,0 +1,15 @@
+{
+  "extends": ["config:base"],
+  "pinVersions": false,
+  "rebaseStalePrs": true,
+  "semanticCommits": true,
+  "lockFileMaintenance": {
+    "enabled": true,
+    "extends": "schedule:monthly"
+  },
+  "automerge": true,
+  "automergeType": "branch",
+  "major": {
+    "automerge": false
+  }
+}

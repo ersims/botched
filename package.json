@@ -1,0 +1,111 @@
+{
+  "name": "botched",
+  "version": "0.0.0",
+  "description": "A better error handling library specifically tailored for use in APIs",
+  "author": "ersims",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ersims/botched.git"
+  },
+  "keywords": [
+    "botched",
+    "error",
+    "errors",
+    "verror",
+    "rest",
+    "json",
+    "api"
+  ],
+  "license": "MIT",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/ersims/botched/issues"
+  },
+  "homepage": "https://github.com/ersims/botched#README.md",
+  "engines": {
+    "node": ">= 8.11.3",
+    "npm": ">= 5.6.0"
+  },
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+      "pre-commit": "npm test"
+    }
+  },
+  "scripts": {
+    "apply:format": "prettier --write \"**/*.{css,less,sass,scss,html,md,graphql,gql,json,ts,tsx,js,jsx,yml,yaml}\"",
+    "prebuild": "npm run clean",
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0 && prettier --write \"CHANGELOG.md\"",
+    "check:format": "prettier --list-different \"**/*.{css,less,sass,scss,html,md,graphql,gql,json,ts,tsx,js,jsx,yml,yaml}\"",
+    "check:linting": "tslint --project tsconfig.json \"**/*.{ts,js}?(x)\"",
+    "check:types": "tsc --noEmit",
+    "check": "npm-run-all check:*",
+    "clean": "del-cli ./.coverage ./dist",
+    "prepare": "npm run build",
+    "release": "echo Recommended semver version bump: && conventional-recommended-bump -p angular && np",
+    "pretest": "npm run check",
+    "test": "jest",
+    "version": "node scripts/bumpTemplateVersion && npm run changelog && git add CHANGELOG.md"
+  },
+  "dependencies": {
+    "@types/verror": "^1.10.3",
+    "uuid": "^3.3.2",
+    "verror": "^1.10.0"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.11",
+    "@types/node": "^10.14.4",
+    "@types/uuid": "^3.4.4",
+    "conventional-changelog-cli": "^2.0.11",
+    "conventional-recommended-bump": "^4.0.4",
+    "del-cli": "^1.1.0",
+    "husky": "^2.1.0",
+    "jest": "^24.7.1",
+    "np": "^5.0.1",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^1.15.2",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.15.0",
+    "tslint-config-airbnb": "^5.11.0",
+    "tslint-config-prettier": "^1.15.0",
+    "tslint-eslint-rules": "^5.4.0",
+    "typescript": "^3.4.1"
+  },
+  "jest": {
+    "bail": true,
+    "collectCoverage": true,
+    "collectCoverageFrom": [
+      "src/**/*.{js,ts}?(x)"
+    ],
+    "coverageDirectory": ".coverage",
+    "coverageThreshold": {
+      "global": {
+        "branches": 100,
+        "functions": 100,
+        "lines": 100,
+        "statements": 100
+      }
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ],
+    "testEnvironment": "node",
+    "testMatch": [
+      "<rootDir>/test/__tests__/**/*.{ts,js}?(x)"
+    ],
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "silent": true,
+    "verbose": true
+  }
+}

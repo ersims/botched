@@ -1,0 +1,33 @@
+# Dont store hidden files and directories by default
+.*
+
+# Exceptions
+!.babelrc*
+!.circleci
+!.env.example
+!.eslintrc
+!.eslintignore
+!.editorconfig
+!.gitattributes
+!.gitignore
+!.gitkeep
+!.npmignore
+!.prettierignore
+!.prettierrc
+!.travis.yml
+!.gitlab-ci.yml
+
+# Generated directories
+build
+coverage
+dist
+node_modules
+
+# Other potentionally conflicting files
+*.db
+*.env
+~*
+*.tmp
+*.log
+npm-debug.log*
+yarn.lock
