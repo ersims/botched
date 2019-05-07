@@ -40,9 +40,7 @@ export default class HttpError extends GenericError {
   /**
    * Is this a server error?
    */
-  get isServer() {
-    return this.statusCode >= 500;
-  }
+  public readonly isServer!: boolean;
 
   /**
    * Thin layer on top of "verror" adapted for http friendly errors
@@ -61,6 +59,14 @@ export default class HttpError extends GenericError {
     Object.assign(this, {
       statusCode: opts.statusCode || cause.statusCode || this.statusCode,
       headers: opts.headers || cause.headers || this.headers,
+    });
+
+    // Make isServer enumerable
+    Object.defineProperty(this, 'isServer', {
+      enumerable: true,
+      get() {
+        return this.statusCode >= 500;
+      },
     });
   }
 
