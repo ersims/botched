@@ -176,15 +176,12 @@ Useful if you are dynamically creating errors.
 
 Serialize error objects to logging friendly objects.
 
-#### `serializeError(error)`
-
-Provide the Error instance and receive a perfectly formatted object back.
-Note that this **will** include sensitive information as the purpose is to create logging friendly objects - not objects to be sent in API responses.
-Use [HttpError](#api-http-error) for that.
-
 #### `createSerializer([options])`
 
-If you need a serializer with custom options you can create your own with this function.
+Create an error serializer function.
+Provide the Error instance and receive a perfectly formatted object back when using the returned serializer function.
+Note that this **will** include sensitive information as the purpose is to create logging friendly objects - not objects to be sent in API responses.
+Use [HttpError](#api-http-error) for that.
 
 ##### Parameters:
 

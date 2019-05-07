@@ -96,5 +96,4 @@ function createSerializer(options?: SerializeErrorOptions) {
 }
 
 // Exports
-export default createSerializer();
-export { createSerializer };
+export default createSerializer;
