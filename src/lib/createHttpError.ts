@@ -4,7 +4,7 @@ import { httpErrorCodes } from './HttpErrors';
 
 // Types
 type httpErrorCodesPreset = typeof httpErrorCodes & { [statusCode: number]: typeof HttpError };
-type StatusCodeToHttpError = { [P in keyof httpErrorCodesPreset]: InstanceType<httpErrorCodesPreset[P]> };
+export type StatusCodeToHttpError = { [P in keyof httpErrorCodesPreset]: InstanceType<httpErrorCodesPreset[P]> };
 
 // Init
 function createHttpError<T extends keyof StatusCodeToHttpError>(
