@@ -20,7 +20,7 @@ Better error handling with JSON:API friendly error objects - inspired by [restif
   - [GenericError](#api-generic-error)
   - [HttpError](#api-http-error)
   - [createHttpError](#api-create-http-error)
-  - [serializeError](#api-serialize)
+  - [createSerializer](#api-serialize)
 - [License](#license)
 
 <a id="installation"></a>
@@ -42,10 +42,11 @@ Using the built in error serializer you can effortlessly log errors in a useful 
 
 ```js
 import express from 'express';
-import { createHttpError, serialize, Unauthorized } from 'botched';
+import { createHttpError, createSerializer, Unauthorized } from 'botched';
 
 // Create app
 const app = express();
+const serialize = createSerializer();
 
 // Middleware that throws Unauthorized if `req.user` is not set
 app.use((req, res, next) => {
@@ -99,8 +100,8 @@ export default class InvalidVersionError extends HttpError {
 
 ## API
 
-All Error constructors are variadic and accept the following signatures, which
-are identical to the[VError and WError][verror-url] signatures.
+All Error constructors are variadic and accept the following signatures, all of which
+are identical to the [VError and WError][verror-url] signatures.
 
 <a id="api-generic-error"></a>
 
@@ -116,7 +117,7 @@ The base Error class with the core functionality.
 
 Additionally you can provide some extra parameters.
 Note that **only** `options.info` is safe for storing sensitive data.
-Best practice is to only use `options.info` for extra information - unless you are certain that the information is useful **(and safe to share)** to 3rd parties, e.g. API consumers.
+Best practice is to use only `options.info` for extra information - unless you are absolutely certain that the information is useful **(and safe to share)** to 3rd parties, e.g. API consumers, and only then use `options.meta`.
 
 ##### Parameters:
 
@@ -131,7 +132,7 @@ Best practice is to only use `options.info` for extra information - unless you a
     - `about` {object|string} - An uri to the detailed documentation or an object containing the uri.
       - `href` {string} - The uri to the detailed documentation
       - `meta` {object} - Any additional data about the link
-  - `meta` {object} - Any additional **non-sensitive** data or information related to this error
+  - `meta` {object} - Any additional **non-sensitive** data or information related to this error that will be visible in `err.toJSON()`
   - `info` {object} - Any additional data or information related to this error
 
 <a id="api-http-error"></a>
@@ -172,7 +173,7 @@ Useful if you are dynamically creating errors.
 
 <a id="api-serialize"></a>
 
-### serializeError
+### createSerializer
 
 Serialize error objects to logging friendly objects.
 
