@@ -11,6 +11,7 @@ const errorCodes = Object.keys(STATUS_CODES)
 
 // Explicit overrides
 const overrides: { [key: number]: string } = {
+  418: "I'm a Teapot",
   425: 'Too Early',
 };
 
