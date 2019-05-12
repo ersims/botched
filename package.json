@@ -49,7 +49,7 @@
     "release": "echo Recommended semver version bump: && conventional-recommended-bump -p angular && np",
     "pretest": "npm run check",
     "test": "jest",
-    "version": "node scripts/bumpTemplateVersion && npm run changelog && git add CHANGELOG.md"
+    "version": "npm run changelog && git add CHANGELOG.md"
   },
   "dependencies": {
     "@types/verror": "^1.10.3",
