@@ -1,4 +1,10 @@
-# 0.1.0 (2019-05-12)
+# [0.2.0](https://github.com/ersims/botched/compare/v0.1.0...v0.2.0) (2019-05-14)
+
+### Features
+
+- add botch function to ensure botched errors ([7af1b97](https://github.com/ersims/botched/commit/7af1b97))
+
+# [0.1.0](https://github.com/ersims/botched/compare/deafa92...v0.1.0) (2019-05-12)
 
 ### Bug Fixes
 
