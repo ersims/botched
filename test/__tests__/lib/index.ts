@@ -4,6 +4,7 @@ import * as Exports from '../../../src';
 import GenericError from '../../../src/lib/GenericError';
 import HttpError from '../../../src/lib/HttpError';
 import createHttpError from '../../../src/lib/createHttpError';
+import botch from '../../../src/lib/botch';
 import * as HttpErrors from '../../../src/lib/HttpErrors';
 
 // Tests
@@ -13,6 +14,9 @@ it('should export core error classes', () => {
 });
 it('should export createHttpError helper', () => {
   expect(Exports.createHttpError).toBe(createHttpError);
+});
+it('should export botch helper', () => {
+  expect(Exports.botch).toBe(botch);
 });
 it('should export all Error classes', () => {
   expect(Exports).toEqual(expect.objectContaining(HttpErrors));

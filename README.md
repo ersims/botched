@@ -21,6 +21,7 @@ Better error handling with JSON:API friendly error objects - inspired by [restif
   - [HttpError](#api-http-error)
   - [createHttpError](#api-create-http-error)
   - [createSerializer](#api-serialize)
+  - [botch](#api-botch)
 - [License](#license)
 
 <a id="installation"></a>
@@ -189,6 +190,15 @@ Use [HttpError](#api-http-error) for that.
 - `options` {object}
   - `fullStack` {boolean} - Should top level Error have the full stack trace (including nested errors?) Default: true
   - `maxDepth` {number} - How deep should the serialization go? Default: 10
+
+<a id="api-botch"></a>
+
+### botch
+
+#### `botch(error)`
+
+Ensure botched error objects.
+If the error is already a botched error then it is returned directly, if else a new botched error is created from it.
 
 <a id="license"></a>
 
