@@ -1,6 +1,6 @@
 {
   "name": "botched",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A better error handling library specifically tailored for use in APIs",
   "author": "ersims",
   "repository": {

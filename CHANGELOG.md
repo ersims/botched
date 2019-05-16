@@ -1,3 +1,9 @@
+## [0.2.1](https://github.com/ersims/botched/compare/v0.2.0...v0.2.1) (2019-05-16)
+
+### Features
+
+- add support for MultiError in botch function ([c3b4a50](https://github.com/ersims/botched/commit/c3b4a50))
+
 # [0.2.0](https://github.com/ersims/botched/compare/v0.1.0...v0.2.0) (2019-05-14)
 
 ### Features
