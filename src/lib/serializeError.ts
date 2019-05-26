@@ -1,5 +1,5 @@
 // Imports
-import { VError } from '../index';
+import VError from 'verror';
 import GenericError from './GenericError';
 import HttpError from './HttpError';
 

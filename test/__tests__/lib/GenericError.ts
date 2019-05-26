@@ -1,6 +1,5 @@
 // Dependencies
 import GenericError from '../../../src/lib/GenericError';
-import HttpError from '../../../src/lib/HttpError';
 
 // Tests
 it('should have sane defaults', () => {

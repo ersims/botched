@@ -3,12 +3,7 @@ import BaseError, { WError } from 'verror';
 import uuidv4 from 'uuid/v4';
 
 // Types
-export type Link =
-  | string
-  | {
-      href: string;
-      meta?: Meta;
-    };
+export type Link = string | { href: string; meta?: Meta };
 export interface Source {
   pointer?: string;
   parameter?: string;
@@ -36,6 +31,16 @@ export default class GenericError extends WError {
   public static source: GenericError['source'];
   public static links: GenericError['links'];
   public static meta: GenericError['meta'];
+
+  /**
+   * Parse options from VError args
+   *
+   * @param {any[]} args
+   * @returns {object}
+   */
+  public static getOptionsFromArgs(args: any[]) {
+    return (args && args[0] && typeof args[0] === 'object' && args[0]) || {};
+  }
 
   /**
    * Unique identifier for this error instance
@@ -88,7 +93,7 @@ export default class GenericError extends WError {
   /**
    * Error details (from Error message)
    */
-  get detail(): string | undefined {
+  public get detail(): string | undefined {
     return this.message !== '' ? this.message : undefined;
   }
 
@@ -96,16 +101,18 @@ export default class GenericError extends WError {
    * Thin layer on top of "verror"
    * @see https://github.com/joyent/node-verror
    */
-  constructor(message?: string, ...params: any[]);
-  constructor(options?: GenericErrorOptions | Error, message?: string, ...params: any[]);
-  constructor(...args: any[]) {
+  public constructor(message?: string, ...params: any[]);
+  // eslint-disable-next-line no-dupe-class-members
+  public constructor(options?: GenericErrorOptions | Error, message?: string, ...params: any[]);
+  // eslint-disable-next-line no-dupe-class-members
+  public constructor(...args: any[]) {
     super(...args);
 
     // Set error name
     this.name = this.constructor.name;
 
     // Extract options
-    const opts = this.getOptionsFromArgs(args);
+    const opts = GenericError.getOptionsFromArgs(args);
     const cause: Partial<GenericError> = this.cause() || {};
 
     // Assign data
@@ -117,16 +124,6 @@ export default class GenericError extends WError {
       links: opts.links || cause.links || this.links,
       meta: opts.meta || cause.meta || this.meta,
     });
-  }
-
-  /**
-   * Parse options from VError args
-   *
-   * @param {any[]} args
-   * @returns {object}
-   */
-  public getOptionsFromArgs(args: any[]) {
-    return (args && args[0] && typeof args[0] === 'object' && args[0]) || {};
   }
 
   /**
