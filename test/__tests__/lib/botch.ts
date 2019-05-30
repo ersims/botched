@@ -1,7 +1,7 @@
 // Dependencies
+import { MultiError, VError } from 'verror';
 import botch from '../../../src/lib/botch';
 import GenericError from '../../../src/lib/GenericError';
-import { MultiError, VError } from 'verror';
 import { Forbidden, GatewayTimeout, InternalServerError, UnprocessableEntity } from '../../../src/lib/HttpErrors';
 
 // Tests

@@ -40,7 +40,7 @@ function botch(err: Error & MaybeDetailedError): HttpError {
     const errors: (Error & MaybeDetailedError)[] = err.errors();
 
     // Extract the most logical common status code
-    for (const error of errors) {
+    errors.some(error => {
       const subData = (typeof error.data === 'object' && error.data) || VError.info(error);
       const subStatusCode = error.statusCode || error.status || subData.statusCode || subData.status || 500;
 
@@ -53,8 +53,8 @@ function botch(err: Error & MaybeDetailedError): HttpError {
       } else statusCode = subStatusCode;
 
       // Just stop if the code is 500 as that will always win
-      if (statusCode === 500) break;
-    }
+      return statusCode === 500;
+    });
   }
 
   // Set final statuscode

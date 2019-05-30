@@ -33,7 +33,7 @@ export default class HttpError extends GenericError {
   /**
    * HTTP Status code in string format
    */
-  get status() {
+  public get status() {
     return this.statusCode.toString();
   }
 
@@ -46,13 +46,13 @@ export default class HttpError extends GenericError {
    * Thin layer on top of "verror" adapted for http friendly errors
    * @see https://github.com/joyent/node-verror
    */
-  constructor(message?: string, ...params: any[]);
-  constructor(options?: HttpErrorOptions | Error, message?: string, ...params: any[]);
-  constructor(...args: any[]) {
+  public constructor(message?: string, ...params: any[]);
+  public constructor(options?: HttpErrorOptions | Error, message?: string, ...params: any[]);
+  public constructor(...args: any[]) {
     super(...args);
 
     // Extract options (and inherited values)
-    const opts = this.getOptionsFromArgs(args);
+    const opts = GenericError.getOptionsFromArgs(args);
     const cause: Partial<HttpError> = this.cause() || {};
 
     // Assign data
