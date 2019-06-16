@@ -1,3 +1,11 @@
+<a name="0.4.0"></a>
+
+# [0.4.0](https://github.com/ersims/botched/compare/v0.3.0...v0.4.0) (2019-06-16)
+
+### Features
+
+- remove generic errors ([6922023](https://github.com/ersims/botched/commit/6922023))
+
 <a name="0.3.0"></a>
 
 # [0.3.0](https://github.com/ersims/botched/compare/v0.2.1...v0.3.0) (2019-06-16)
