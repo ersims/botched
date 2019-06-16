@@ -1,7 +1,6 @@
 import { STATUS_CODES } from 'http';
-import HttpError from '../../../src/lib/HttpError';
-import createHttpError from '../../../src/lib/createHttpError';
-import GenericError from '../../../src/lib/GenericError';
+import BotchedError from '../../../src/lib/BotchedError';
+import createError from '../../../src/lib/createError';
 
 // Get relevant status codes
 const errorCodes = Object.keys(STATUS_CODES)
@@ -17,35 +16,32 @@ const overrides: { [key: number]: string } = {
 // Tests
 it('should create all errors from STATUS_CODES', () => {
   const codes = errorCodes.slice(0);
-  expect.assertions(codes.length * 6);
+  expect.assertions(codes.length * 5);
   codes.forEach(code => {
-    const error = createHttpError(code);
+    const error = createError(code);
     expect(error.statusCode).toBe(code);
     expect(error.status).toBe(code.toString());
     expect(error.code).toBe(error.name);
     expect(error.title).toBe(overrides[code] || STATUS_CODES[code]);
-    expect(error instanceof GenericError).toBe(true);
-    expect(error instanceof HttpError).toBe(true);
+    expect(error).toBeInstanceOf(BotchedError);
   });
 });
 it('should create generic errors if unknown error code is provided', () => {
-  const error = createHttpError(599);
+  const error = createError(599);
   expect(error.statusCode).toBe(599);
   expect(error.status).toBe('599');
   expect(error.title).toBe('Internal Server Error');
-  expect(error.name).toBe('HttpError');
-  expect(error instanceof GenericError).toBe(true);
-  expect(error instanceof HttpError).toBe(true);
+  expect(error.name).toBe('BotchedError');
+  expect(error).toBeInstanceOf(BotchedError);
 });
 it('should create generic error if no error code is provided', () => {
-  const error = createHttpError();
+  const error = createError();
   expect(error.statusCode).toBe(500);
   expect(error.status).toBe('500');
   expect(error.title).toBe('Internal Server Error');
   expect(error.name).toBe('InternalServerError');
-  expect(error instanceof GenericError).toBe(true);
-  expect(error instanceof HttpError).toBe(true);
+  expect(error).toBeInstanceOf(BotchedError);
 });
 it('should fail if attempting to create errors with invalid status codes', () => {
-  expect(() => createHttpError(399)).toThrow('statusCode must be 400 or greater');
+  expect(() => createError(399)).toThrow('statusCode must be 400 or greater');
 });

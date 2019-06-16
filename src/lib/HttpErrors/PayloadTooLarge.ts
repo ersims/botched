@@ -1,7 +1,7 @@
-import HttpError from '../HttpError';
+import BotchedError from '../BotchedError';
 
 // Exports
-export default class PayloadTooLarge extends HttpError {
+export default class PayloadTooLarge extends BotchedError {
   /**
    * @override
    */

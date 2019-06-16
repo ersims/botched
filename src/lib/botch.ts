@@ -1,7 +1,8 @@
 import { VError } from 'verror';
-import HttpError from './HttpError';
-import createHttpError from './createHttpError';
+import BotchedError from './BotchedError';
+import createError from './createError';
 import getStatusCode from './getStatusCode';
+import isBotched from './isBotched';
 
 // Types
 export interface MaybeDetailedError {
@@ -20,7 +21,6 @@ export interface MaybeDetailedError {
     | any;
   status?: any;
   statusCode?: any;
-  isBotched?: boolean;
   errors?: any;
   headers?: any;
   id?: any;
@@ -38,18 +38,18 @@ export interface MaybeDetailedError {
  * See `wrap` for a safe alternative
  *
  * @param {Error} err
- * @returns {HttpError}
+ * @returns {BotchedError}
  */
-function botch(err: Error & MaybeDetailedError): HttpError {
+function botch(err: Error & MaybeDetailedError): BotchedError {
   // Return fast?
-  if (err instanceof HttpError) return err;
+  if (isBotched(err)) return err;
 
   // Extract any default information
   const statusCode = getStatusCode(err);
   const data = (typeof err.data === 'object' && err.data) || VError.info(err);
   const headers = err.headers || err.headers || data.headers || data.headers;
 
-  return createHttpError(
+  return createError(
     statusCode,
     {
       headers,

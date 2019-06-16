@@ -1,6 +1,7 @@
-import HttpError from './HttpError';
-import createHttpError from './createHttpError';
+import BotchedError from './BotchedError';
+import createError from './createError';
 import getStatusCode from './getStatusCode';
+import isBotched from './isBotched';
 
 // Types
 export interface MaybeDetailedError {
@@ -14,7 +15,6 @@ export interface MaybeDetailedError {
   headers?: any;
   status?: any;
   statusCode?: any;
-  isBotched?: boolean;
   errors?: any;
 }
 
@@ -25,10 +25,10 @@ export interface MaybeDetailedError {
  * See `botch` for an unsafe alternative
  *
  * @param {Error} err
- * @returns {HttpError}
+ * @returns {BotchedError}
  */
-function wrap(err: Error & MaybeDetailedError): HttpError {
-  return err instanceof HttpError ? err : createHttpError(getStatusCode(err), { cause: err });
+function wrap(err: Error & MaybeDetailedError): BotchedError {
+  return isBotched(err) ? err : createError(getStatusCode(err), { cause: err });
 }
 
 // Exports

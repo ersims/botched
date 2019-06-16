@@ -1,7 +1,7 @@
-import HttpError from '../HttpError';
+import BotchedError from '../BotchedError';
 
 // Exports
-export default class LoopDetected extends HttpError {
+export default class LoopDetected extends BotchedError {
   /**
    * @override
    */

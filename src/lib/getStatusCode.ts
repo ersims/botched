@@ -1,4 +1,4 @@
-import { MultiError, VError } from 'verror';
+import { VError } from 'verror';
 
 // Types
 export interface MaybeDetailedError {
@@ -26,7 +26,7 @@ function getStatusCode(err: Error & MaybeDetailedError): number {
   let statusCode = err.statusCode || err.status || data.statusCode || data.status;
 
   // Check for MultiError and find the most appropriate common status code
-  if (err instanceof MultiError && !statusCode) {
+  if (err.errors && typeof err.errors === 'function' && !statusCode) {
     const errors: (Error & MaybeDetailedError)[] = err.errors();
 
     // Extract the most logical common status code
@@ -44,16 +44,13 @@ function getStatusCode(err: Error & MaybeDetailedError): number {
       // Just stop if the code is 500 as that will always win
       return statusCode === 500;
     });
-  }
-
-  // Still nothing?
-  if (!statusCode) {
+  } else if (!statusCode) {
     const info = VError.info(err);
     statusCode = info.statusCode || info.status || 500;
   }
 
   // Return final statusCode and default to 500
-  return statusCode && statusCode >= 400 ? statusCode : 500;
+  return statusCode >= 400 ? statusCode : 500;
 }
 
 // Exports
