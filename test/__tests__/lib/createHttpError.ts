@@ -1,4 +1,3 @@
-// Dependencies
 import { STATUS_CODES } from 'http';
 import HttpError from '../../../src/lib/HttpError';
 import createHttpError from '../../../src/lib/createHttpError';

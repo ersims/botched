@@ -1,4 +1,3 @@
-// Imports
 import HttpError from '../HttpError';
 
 // Exports

@@ -1,4 +1,3 @@
-// Imports
 import GenericError, { GenericErrorOptions } from './GenericError';
 
 // Types
@@ -53,12 +52,11 @@ export default class HttpError extends GenericError {
 
     // Extract options (and inherited values)
     const opts = GenericError.getOptionsFromArgs(args);
-    const cause: Partial<HttpError> = this.cause() || {};
 
     // Assign data
     Object.assign(this, {
-      statusCode: opts.statusCode || cause.statusCode || this.statusCode,
-      headers: opts.headers || cause.headers || this.headers,
+      statusCode: opts.statusCode || this.statusCode,
+      headers: opts.headers || this.headers,
     });
 
     // Make isServer enumerable

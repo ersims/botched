@@ -1,4 +1,3 @@
-// Dependencies
 import createSerializer from '../../../src/lib/serializeError';
 import BadRequest from '../../../src/lib/HttpErrors/BadRequest';
 import InternalServerError from '../../../src/lib/HttpErrors/InternalServerError';

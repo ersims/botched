@@ -1,4 +1,3 @@
-// Dependencies
 import HttpError from '../../../src/lib/HttpError';
 
 // Tests
@@ -52,8 +51,8 @@ it('should support additional data', () => {
     random: 'data to be displayed',
   });
 });
-it('should inherit data from child', () => {
-  const childError = new HttpError(
+it('should NOT inherit from the cause', () => {
+  const errorCause = new HttpError(
     {
       id: 'my-id',
       code: 'my-code',
@@ -72,23 +71,16 @@ it('should inherit data from child', () => {
     },
     'My Error',
   );
-  const error = new HttpError({ cause: childError, id: 'my-new-id', statusCode: 400 }, 'My New Error');
+  const error = new HttpError({ cause: errorCause, id: 'my-new-id', statusCode: 400 }, 'My New Error');
   expect(error.id).toBe('my-new-id');
-  expect(error.code).toBe('my-code');
+  expect(error.code).toBe('HttpError');
   expect(error.statusCode).toBe(400);
   expect(error.status).toBe('400');
-  expect(error.title).toBe('my-title');
+  expect(error.title).toBe('Internal Server Error');
   expect(error.detail).toBe('My New Error');
-  expect(error.source).toEqual({
-    pointer: '/data',
-    parameter: 'key',
-  });
-  expect(error.links).toEqual({
-    about: '/docs/error/my-id',
-  });
-  expect(error.meta).toEqual({
-    random: 'data to be displayed',
-  });
+  expect(error.source).toBe(undefined);
+  expect(error.links).toBe(undefined);
+  expect(error.meta).toBe(undefined);
 });
 it('should serialize to JSON:API spec', () => {
   const error = new HttpError(
