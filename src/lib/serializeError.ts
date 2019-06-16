@@ -1,10 +1,9 @@
-// Imports
 import VError from 'verror';
 import GenericError from './GenericError';
 import HttpError from './HttpError';
 
 // Types
-interface SerializedErrorObject {
+export interface SerializedErrorObject {
   name?: string;
   stack?: string;
   info?: object;
@@ -21,11 +20,11 @@ interface SerializedErrorObject {
   isBotched?: GenericError['isBotched'];
   [key: string]: any;
 }
-interface SerializeErrorOptions {
+export interface SerializeErrorOptions {
   maxDepth?: number;
   fullStack?: boolean;
 }
-interface SerializableError {
+export interface SerializableError {
   [key: string]: any;
 }
 

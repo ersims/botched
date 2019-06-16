@@ -1,4 +1,3 @@
-// Imports
 import BaseError, { WError } from 'verror';
 import uuidv4 from 'uuid/v4';
 
@@ -113,16 +112,15 @@ export default class GenericError extends WError {
 
     // Extract options
     const opts = GenericError.getOptionsFromArgs(args);
-    const cause: Partial<GenericError> = this.cause() || {};
 
     // Assign data
     Object.assign(this, {
-      id: opts.id || cause.id || this.id || uuidv4(),
-      code: opts.code || cause.code || this.code,
-      title: opts.title || cause.title || this.title,
-      source: opts.source || cause.source || this.source,
-      links: opts.links || cause.links || this.links,
-      meta: opts.meta || cause.meta || this.meta,
+      id: opts.id || this.id || uuidv4(),
+      code: opts.code || this.code,
+      title: opts.title || this.title,
+      source: opts.source || this.source,
+      links: opts.links || this.links,
+      meta: opts.meta || this.meta,
     });
   }
 

@@ -1,4 +1,3 @@
-// Imports
 import HttpError, { HttpErrorOptions } from './HttpError';
 import { httpErrorCodes } from './HttpErrors';
 

@@ -1,4 +1,3 @@
-// Dependencies
 import GenericError from '../../../src/lib/GenericError';
 
 // Tests
@@ -54,8 +53,8 @@ it('should support additional data', () => {
     random: 'data to be displayed',
   });
 });
-it('should inherit data from child', () => {
-  const childError = new GenericError(
+it('should NOT inherit from the cause', () => {
+  const errorCause = new GenericError(
     {
       id: 'my-id',
       code: 'my-code',
@@ -73,21 +72,14 @@ it('should inherit data from child', () => {
     },
     'My Error',
   );
-  const error = new GenericError({ cause: childError, id: 'my-new-id' }, 'My New Error');
+  const error = new GenericError({ cause: errorCause, id: 'my-new-id' }, 'My New Error');
   expect(error.id).toBe('my-new-id');
-  expect(error.code).toBe('my-code');
-  expect(error.title).toBe('my-title');
+  expect(error.code).toBe('GenericError');
+  expect(error.title).toBe('Internal Server Error');
   expect(error.detail).toBe('My New Error');
-  expect(error.source).toEqual({
-    pointer: '/data',
-    parameter: 'key',
-  });
-  expect(error.links).toEqual({
-    about: '/docs/error/my-id',
-  });
-  expect(error.meta).toEqual({
-    random: 'data to be displayed',
-  });
+  expect(error.source).toBe(undefined);
+  expect(error.links).toBe(undefined);
+  expect(error.meta).toBe(undefined);
 });
 it('should serialize to JSON:API spec', () => {
   const error = new GenericError(

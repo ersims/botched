@@ -1,4 +1,3 @@
-// Imports
 import BadRequest from './BadRequest';
 import Unauthorized from './Unauthorized';
 import PaymentRequired from './PaymentRequired';

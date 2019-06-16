@@ -1,4 +1,3 @@
-// Dependencies
 import VError from 'verror';
 import * as Exports from '../../../src';
 import GenericError from '../../../src/lib/GenericError';
@@ -6,6 +5,7 @@ import HttpError from '../../../src/lib/HttpError';
 import createHttpError from '../../../src/lib/createHttpError';
 import createSerializer from '../../../src/lib/serializeError';
 import botch from '../../../src/lib/botch';
+import wrap from '../../../src/lib/wrap';
 import * as HttpErrors from '../../../src/lib/HttpErrors';
 
 // Tests
@@ -21,6 +21,9 @@ it('should export createSerializer helper', () => {
 });
 it('should export botch helper', () => {
   expect(Exports.botch).toBe(botch);
+});
+it('should export wrap helper', () => {
+  expect(Exports.wrap).toBe(wrap);
 });
 it('should export all Error classes', () => {
   expect(Exports).toEqual(expect.objectContaining(HttpErrors));

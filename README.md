@@ -22,6 +22,7 @@ Better error handling with JSON:API friendly error objects - inspired by [restif
   - [createHttpError](#api-create-http-error)
   - [createSerializer](#api-serialize)
   - [botch](#api-botch)
+  - [wrap](#api-wrap)
 - [License](#license)
 
 <a id="installation"></a>
@@ -197,10 +198,33 @@ Use [HttpError](#api-http-error) for that.
 
 #### `botch(error)`
 
-Ensure botched error objects.
-If the error is already a botched error then it is returned directly, if else a new botched error is created from it.
+Create a botched error from a source error or return the error directly if it is already a botched error.
+
+**Note:** this will inherit information from the source error.
+Only use this if you are certain that the error does not contain sensitive information.
+See [wrap](#api-wrap) for a safer alternative.
+
+If the error is not already a botched error, then a botched error will be created and inherit all botched properties.
+The cause will be set to the source error.
+
+<a id="api-wrap"></a>
+
+### wrap
+
+#### `wrap(error)`
+
+Wrap an error to a botched error or return the error directly if it is already a botched error.
+This is equivalent to [botch](#api-botch), but does not inherit any properties except the status code.
+Use this if you cannot guarantee that the error does not include sensitive information.
+
+If the error is not already a botched error, then a botched error will be created and only the status code will be inherited.
+The cause will be set to the source error.
 
 <a id="license"></a>
+
+## TODO
+
+1. Remove automatic propagation of code, details etc from error causes (especially for status code 500+) when using `botch`
 
 ## License
 
