@@ -1,7 +1,7 @@
-import HttpError from '../HttpError';
+import BotchedError from '../BotchedError';
 
 // Exports
-export default class Gone extends HttpError {
+export default class Gone extends BotchedError {
   /**
    * @override
    */

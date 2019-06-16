@@ -1,6 +1,5 @@
 import VError from 'verror';
-import GenericError from './GenericError';
-import HttpError from './HttpError';
+import BotchedError from './BotchedError';
 
 // Types
 export interface SerializedErrorObject {
@@ -8,16 +7,16 @@ export interface SerializedErrorObject {
   stack?: string;
   info?: object;
   cause?: SerializedErrorObject | null;
-  id?: GenericError['id'];
-  code?: GenericError['code'];
-  title?: GenericError['title'];
-  source?: GenericError['source'];
-  links?: GenericError['links'];
-  meta?: GenericError['meta'];
-  statusCode?: HttpError['statusCode'];
-  headers?: HttpError['headers'];
-  isServer?: HttpError['isServer'];
-  isBotched?: GenericError['isBotched'];
+  id?: BotchedError['id'];
+  code?: BotchedError['code'];
+  title?: BotchedError['title'];
+  source?: BotchedError['source'];
+  links?: BotchedError['links'];
+  meta?: BotchedError['meta'];
+  statusCode?: BotchedError['statusCode'];
+  headers?: BotchedError['headers'];
+  isServer?: BotchedError['isServer'];
+  isBotched?: BotchedError['isBotched'];
   [key: string]: any;
 }
 export interface SerializeErrorOptions {
@@ -85,7 +84,7 @@ function smartSerialize<T extends object>(
  */
 function createSerializer(options?: SerializeErrorOptions) {
   const opts = Object.assign({ fullStack: true, maxDepth: 10 }, options);
-  return function serialize(error: Error & Partial<HttpError>): SerializedErrorObject {
+  return function serialize(error: Error & Partial<BotchedError>): SerializedErrorObject {
     const serializedError = smartSerialize(error, opts.maxDepth);
     return {
       ...serializedError,

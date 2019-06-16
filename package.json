@@ -110,7 +110,7 @@
     "transform": {
       "^.+\\.tsx?$": "ts-jest"
     },
-    "silent": true,
+    "silent": false,
     "verbose": true
   }
 }

@@ -1,10 +1,10 @@
 import { MultiError, VError } from 'verror';
-import GenericError from '../../../src/lib/GenericError';
+import BotchedError from '../../../src/lib/BotchedError';
 import { Forbidden, GatewayTimeout, UnprocessableEntity } from '../../../src/lib/HttpErrors';
 import getStatusCode from '../../../src/lib/getStatusCode';
 
 // Tests
-describe('HttpError', () => {
+describe('BotchedError', () => {
   it('should use the provided status code', () => {
     const error = new UnprocessableEntity('My Message');
     const statusCode = getStatusCode(error);
@@ -15,17 +15,15 @@ describe('HttpError', () => {
     const statusCode = getStatusCode(error);
     expect(statusCode).toBe(500);
   });
-});
-describe('GenericError', () => {
   it('should default to 500', () => {
-    const error = new GenericError('My Message');
+    const error = new BotchedError('My Message');
     const statusCode = getStatusCode(error);
     expect(statusCode).toBe(500);
   });
 });
 describe('Vanilla Error', () => {
   it('should default to 500', () => {
-    const error = new GenericError('My Message');
+    const error = new Error('My Message');
     const statusCode = getStatusCode(error);
     expect(statusCode).toBe(500);
   });

@@ -1,7 +1,7 @@
-import HttpError from '../HttpError';
+import BotchedError from '../BotchedError';
 
 // Exports
-export default class RequestTimeout extends HttpError {
+export default class RequestTimeout extends BotchedError {
   /**
    * @override
    */

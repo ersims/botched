@@ -1,23 +1,23 @@
-import HttpError, { HttpErrorOptions } from './HttpError';
+import BotchedError, { ErrorOptions } from './BotchedError';
 import { httpErrorCodes } from './HttpErrors';
 
 // Types
-type httpErrorCodesPreset = typeof httpErrorCodes & { [statusCode: number]: typeof HttpError };
+type httpErrorCodesPreset = typeof httpErrorCodes & { [statusCode: number]: typeof BotchedError };
 export type StatusCodeToHttpError = { [P in keyof httpErrorCodesPreset]: InstanceType<httpErrorCodesPreset[P]> };
 
 // Init
-function createHttpError<T extends keyof StatusCodeToHttpError>(
+function createError<T extends keyof StatusCodeToHttpError>(
   statusCode: T | number,
   message?: string,
   ...params: any[]
 ): StatusCodeToHttpError[T];
-function createHttpError<T extends keyof StatusCodeToHttpError>(
+function createError<T extends keyof StatusCodeToHttpError>(
   statusCode?: T | number,
-  options?: HttpErrorOptions | Error,
+  options?: ErrorOptions | Error,
   message?: string,
   ...params: any[]
 ): StatusCodeToHttpError[T];
-function createHttpError<T extends keyof StatusCodeToHttpError>(
+function createError<T extends keyof StatusCodeToHttpError>(
   statusCode: T | number = 500,
   ...args: any[]
 ): StatusCodeToHttpError[T] {
@@ -26,11 +26,11 @@ function createHttpError<T extends keyof StatusCodeToHttpError>(
 
   if (statusCode in httpErrorCodes) return new (httpErrorCodes as httpErrorCodesPreset)[statusCode](...args);
 
-  // Create a generic Http Error class for this missing Http Error
-  const httpError = new HttpError(...args);
-  httpError.statusCode = statusCode;
-  return httpError;
+  // Create a BotchedError class for this missing Http Error
+  const botchedError = new BotchedError(...args);
+  botchedError.statusCode = statusCode;
+  return botchedError;
 }
 
 // Exports
-export default createHttpError;
+export default createError;

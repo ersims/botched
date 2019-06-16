@@ -1,10 +1,10 @@
 import VError from 'verror';
-import GenericError from './lib/GenericError';
-import HttpError, { HttpErrorOptions } from './lib/HttpError';
+import BotchedError, { ErrorOptions } from './lib/BotchedError';
 import botch from './lib/botch';
 import wrap from './lib/wrap';
 import getStatusCode from './lib/getStatusCode';
-import createHttpError, { StatusCodeToHttpError } from './lib/createHttpError';
+import isBotched from './lib/isBotched';
+import createError, { StatusCodeToHttpError } from './lib/createError';
 import createSerializer from './lib/serializeError';
 
 // Exports
@@ -13,10 +13,10 @@ export {
   botch,
   wrap,
   getStatusCode,
-  createHttpError,
-  GenericError,
-  HttpError,
-  HttpErrorOptions,
+  isBotched,
+  createError,
+  BotchedError,
+  ErrorOptions,
   StatusCodeToHttpError,
   VError,
   createSerializer,
