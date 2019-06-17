@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class URITooLong extends BotchedError {
+export class URITooLong extends BotchedError {
   /**
    * @override
    */

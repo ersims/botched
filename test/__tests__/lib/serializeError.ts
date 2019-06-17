@@ -1,6 +1,5 @@
 import createSerializer from '../../../src/lib/serializeError';
-import BadRequest from '../../../src/lib/HttpErrors/BadRequest';
-import InternalServerError from '../../../src/lib/HttpErrors/InternalServerError';
+import { BadRequest, InternalServerError } from '../../../src/lib/HttpErrors';
 
 // Create a default serializer for re-use
 const serialize = createSerializer();

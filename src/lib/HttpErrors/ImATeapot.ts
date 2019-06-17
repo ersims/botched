@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class ImATeapot extends BotchedError {
+export class ImATeapot extends BotchedError {
   /**
    * @override
    */

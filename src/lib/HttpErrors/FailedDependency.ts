@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class FailedDependency extends BotchedError {
+export class FailedDependency extends BotchedError {
   /**
    * @override
    */

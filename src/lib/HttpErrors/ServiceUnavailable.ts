@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class ServiceUnavailable extends BotchedError {
+export class ServiceUnavailable extends BotchedError {
   /**
    * @override
    */

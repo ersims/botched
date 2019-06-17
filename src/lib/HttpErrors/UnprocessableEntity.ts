@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class UnprocessableEntity extends BotchedError {
+export class UnprocessableEntity extends BotchedError {
   /**
    * @override
    */

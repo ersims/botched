@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class RequestTimeout extends BotchedError {
+export class RequestTimeout extends BotchedError {
   /**
    * @override
    */

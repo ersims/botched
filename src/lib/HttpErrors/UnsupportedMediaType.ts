@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class UnsupportedMediaType extends BotchedError {
+export class UnsupportedMediaType extends BotchedError {
   /**
    * @override
    */

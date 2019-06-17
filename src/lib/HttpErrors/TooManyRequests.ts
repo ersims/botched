@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class TooManyRequests extends BotchedError {
+export class TooManyRequests extends BotchedError {
   /**
    * @override
    */

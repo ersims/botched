@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class TooEarly extends BotchedError {
+export class TooEarly extends BotchedError {
   /**
    * @override
    */
