@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class BandwidthLimitExceeded extends BotchedError {
+export class BandwidthLimitExceeded extends BotchedError {
   /**
    * @override
    */

@@ -1,8 +1,7 @@
 import { MultiError, VError, WError } from 'verror';
 import BotchedError from '../../../src/lib/BotchedError';
 import isBotched from '../../../src/lib/isBotched';
-import InternalServerError from '../../../src/lib/HttpErrors/InternalServerError';
-import BadRequest from '../../../src/lib/HttpErrors/BadRequest';
+import { BadRequest, InternalServerError } from '../../../src/lib/HttpErrors';
 
 // Tests
 describe('Botched Errors', () => {

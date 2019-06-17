@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class Locked extends BotchedError {
+export class Locked extends BotchedError {
   /**
    * @override
    */

@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class NotFound extends BotchedError {
+export class NotFound extends BotchedError {
   /**
    * @override
    */

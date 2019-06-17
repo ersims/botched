@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class NetworkAuthenticationRequired extends BotchedError {
+export class NetworkAuthenticationRequired extends BotchedError {
   /**
    * @override
    */

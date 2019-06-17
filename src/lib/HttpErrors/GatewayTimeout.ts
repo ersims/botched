@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class GatewayTimeout extends BotchedError {
+export class GatewayTimeout extends BotchedError {
   /**
    * @override
    */

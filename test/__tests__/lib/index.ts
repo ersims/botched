@@ -32,6 +32,8 @@ it('should export wrap helper', () => {
   expect(Exports.wrap).toBe(wrap);
 });
 it('should export all Error classes', () => {
+  // One export is httpErrorCodes - everything else should be the errors
+  expect(Object.keys(HttpErrors)).toHaveLength(41 + 1);
   expect(Exports).toEqual(expect.objectContaining(HttpErrors));
 });
 it('should export VError from `verror`', () => {

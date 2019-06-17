@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class LoopDetected extends BotchedError {
+export class LoopDetected extends BotchedError {
   /**
    * @override
    */

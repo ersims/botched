@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class ProxyAuthenticationRequired extends BotchedError {
+export class ProxyAuthenticationRequired extends BotchedError {
   /**
    * @override
    */

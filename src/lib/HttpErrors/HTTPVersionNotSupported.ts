@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class HTTPVersionNotSupported extends BotchedError {
+export class HTTPVersionNotSupported extends BotchedError {
   /**
    * @override
    */

@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class InsufficientStorage extends BotchedError {
+export class InsufficientStorage extends BotchedError {
   /**
    * @override
    */

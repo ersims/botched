@@ -1,7 +1,7 @@
 import BotchedError from '../BotchedError';
 
 // Exports
-export default class PreconditionFailed extends BotchedError {
+export class PreconditionFailed extends BotchedError {
   /**
    * @override
    */
