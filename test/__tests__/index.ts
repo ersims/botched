@@ -1,13 +1,13 @@
 import VError from 'verror';
-import * as Exports from '../../../src';
-import BotchedError from '../../../src/lib/BotchedError';
-import createError from '../../../src/lib/createError';
-import createSerializer from '../../../src/lib/serializeError';
-import getStatusCode from '../../../src/lib/getStatusCode';
-import isBotched from '../../../src/lib/isBotched';
-import botch from '../../../src/lib/botch';
-import wrap from '../../../src/lib/wrap';
-import * as HttpErrors from '../../../src/lib/HttpErrors';
+import * as Exports from '../../src';
+import BotchedError from '../../src/lib/BotchedError';
+import createError from '../../src/lib/createError';
+import createSerializer from '../../src/lib/serializeError';
+import getStatusCode from '../../src/lib/getStatusCode';
+import isBotched from '../../src/lib/isBotched';
+import botch from '../../src/lib/botch';
+import wrap from '../../src/lib/wrap';
+import * as HttpErrors from '../../src/lib/HttpErrors';
 
 // Tests
 it('should export BotchedError', () => {
