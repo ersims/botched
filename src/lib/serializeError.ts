@@ -83,7 +83,7 @@ function smartSerialize<T extends object>(
  * @returns {Function}
  */
 function createSerializer(options?: SerializeErrorOptions) {
-  const opts = Object.assign({ fullStack: true, maxDepth: 10 }, options);
+  const opts = { fullStack: true, maxDepth: 10, ...options };
   return function serialize(error: Error & Partial<BotchedError>): SerializedErrorObject {
     const serializedError = smartSerialize(error, opts.maxDepth);
     return {
