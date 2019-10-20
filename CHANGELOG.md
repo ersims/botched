@@ -1,3 +1,7 @@
+<a name="0.4.3"></a>
+
+## [0.4.3](https://github.com/ersims/botched/compare/v0.4.2...v0.4.3) (2019-10-20)
+
 <a name="0.4.2"></a>
 
 ## [0.4.2](https://github.com/ersims/botched/compare/v0.4.1...v0.4.2) (2019-07-17)
