@@ -5,6 +5,6 @@ export class RequestTimeout extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 408;
+  public static status = 408;
   public static title = 'Request Timeout';
 }

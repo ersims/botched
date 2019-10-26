@@ -5,6 +5,6 @@ export class MisdirectedRequest extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 421;
+  public static status = 421;
   public static title = 'Misdirected Request';
 }

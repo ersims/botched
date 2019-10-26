@@ -23,7 +23,7 @@ export interface MaybeDetailedError {
 function getStatusCode(err: Error & MaybeDetailedError): number {
   // Extract any default information
   const data = (typeof err.data === 'object' && err.data) || {};
-  let statusCode = err.statusCode || err.status || data.statusCode || data.status;
+  let statusCode = err.status || err.statusCode || data.status || data.statusCode;
 
   // Check for MultiError and find the most appropriate common status code
   if (err.errors && typeof err.errors === 'function' && !statusCode) {

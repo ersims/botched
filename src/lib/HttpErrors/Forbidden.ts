@@ -5,6 +5,6 @@ export class Forbidden extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 403;
+  public static status = 403;
   public static title = 'Forbidden';
 }

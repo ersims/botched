@@ -5,6 +5,6 @@ export class ImATeapot extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 418;
+  public static status = 418;
   public static title = "I'm a Teapot";
 }

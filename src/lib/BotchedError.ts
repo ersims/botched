@@ -20,7 +20,7 @@ export interface ErrorOptions extends BaseError.Options {
   source?: BotchedError['source'];
   links?: BotchedError['links'];
   meta?: BotchedError['meta'];
-  statusCode?: BotchedError['statusCode'];
+  status?: BotchedError['status'];
   headers?: BotchedError['headers'];
 }
 
@@ -38,7 +38,7 @@ export default class BotchedError extends WError {
   public static source: BotchedError['source'];
   public static links: BotchedError['links'];
   public static meta: BotchedError['meta'];
-  public static statusCode: BotchedError['statusCode'] = 500;
+  public static status: BotchedError['status'] = 500;
   public static headers: BotchedError['headers'] = {};
 
   /**
@@ -111,7 +111,7 @@ export default class BotchedError extends WError {
    *
    * Do not put any sensitive information here!
    */
-  public statusCode: number = (this.constructor as typeof BotchedError).statusCode;
+  public status: number = (this.constructor as typeof BotchedError).status;
 
   /**
    * HTTP Headers to send
@@ -119,13 +119,6 @@ export default class BotchedError extends WError {
    * Do not put any sensitive information here!
    */
   public headers: { [key: string]: string } = (this.constructor as typeof BotchedError).headers;
-
-  /**
-   * HTTP Status code in string format
-   */
-  public get status() {
-    return this.statusCode.toString();
-  }
 
   /**
    * Botched error version
@@ -162,7 +155,7 @@ export default class BotchedError extends WError {
       source: opts.source || this.source,
       links: opts.links || this.links,
       meta: opts.meta || this.meta,
-      statusCode: opts.statusCode || this.statusCode,
+      status: opts.status || this.status,
       headers: opts.headers || this.headers,
     });
 
@@ -170,7 +163,7 @@ export default class BotchedError extends WError {
     Object.defineProperty(this, 'isServer', {
       enumerable: true,
       get() {
-        return this.statusCode >= 500;
+        return this.status >= 500;
       },
     });
   }

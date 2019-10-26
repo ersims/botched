@@ -5,6 +5,6 @@ export class NotImplemented extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 501;
+  public static status = 501;
   public static title = 'Not Implemented';
 }

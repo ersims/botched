@@ -5,6 +5,6 @@ export class PayloadTooLarge extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 413;
+  public static status = 413;
   public static title = 'Payload Too Large';
 }

@@ -5,6 +5,6 @@ export class ExpectationFailed extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 417;
+  public static status = 417;
   public static title = 'Expectation Failed';
 }

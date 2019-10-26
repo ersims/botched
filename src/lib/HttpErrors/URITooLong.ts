@@ -5,6 +5,6 @@ export class URITooLong extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 414;
+  public static status = 414;
   public static title = 'URI Too Long';
 }

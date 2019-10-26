@@ -5,6 +5,6 @@ export class Conflict extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 409;
+  public static status = 409;
   public static title = 'Conflict';
 }

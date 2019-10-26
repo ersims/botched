@@ -5,6 +5,6 @@ export class GatewayTimeout extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 504;
+  public static status = 504;
   public static title = 'Gateway Timeout';
 }

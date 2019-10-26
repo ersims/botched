@@ -12,36 +12,36 @@ it('should use getStatusCode for status codes', () => {
   (getStatusCode as jest.Mock).mockReturnValueOnce(499);
   const error = new Error('My Message');
   const botchedError = botch(error);
-  expect(botchedError.statusCode).toBe(499);
+  expect(botchedError.status).toBe(499);
 });
 describe('BotchedError', () => {
-  it('should not touch a botched http error of statusCode 400-499', () => {
+  it('should not touch a botched http error with status 400-499', () => {
     const error = new UnprocessableEntity('My Message');
     const botchedError = botch(error);
     expect(error.isBotched).toBe(true);
     expect(error).toBe(botchedError);
     expect(botchedError.isBotched).toBe(true);
-    expect(botchedError.statusCode).toBe(422);
+    expect(botchedError.status).toBe(422);
     expect(botchedError.detail).toBe('My Message');
     expect(botchedError.cause()).toBe(undefined);
   });
-  it('should not touch a botched http error of statusCode >= 500', () => {
+  it('should not touch a botched http error with status >= 500', () => {
     const error = new InternalServerError('My Message');
     const botchedError = botch(error);
     expect(error.isBotched).toBe(true);
     expect(error).toBe(botchedError);
     expect(botchedError.isBotched).toBe(true);
-    expect(botchedError.statusCode).toBe(500);
+    expect(botchedError.status).toBe(500);
     expect(botchedError.detail).toBe('My Message');
     expect(botchedError.cause()).toBe(undefined);
   });
-  it('should not touch a BotchedError invalid statusCode', () => {
-    const error = new InternalServerError({ statusCode: 101 }, 'My Message');
+  it('should not touch a BotchedError with invalid statusCode', () => {
+    const error = new InternalServerError({ status: 101 }, 'My Message');
     const botchedError = botch(error);
     expect(error.isBotched).toBe(true);
     expect(error).toBe(botchedError);
     expect(botchedError.isBotched).toBe(true);
-    expect(botchedError.statusCode).toBe(101);
+    expect(botchedError.status).toBe(101);
     expect(botchedError.detail).toBe('My Message');
     expect(botchedError.cause()).toBe(undefined);
   });
@@ -52,7 +52,7 @@ describe('Vanilla Error', () => {
     const botchedError = botch(error);
     expect(error).not.toBe(botchedError);
     expect(botchedError.isBotched).toBe(true);
-    expect(botchedError.statusCode).toBe(500);
+    expect(botchedError.status).toBe(500);
     expect(botchedError.detail).toBe('My Message');
     expect(botchedError.cause()).toBe(error);
     expect(botchedError).toBeInstanceOf(InternalServerError);
@@ -84,8 +84,7 @@ describe('Vanilla Error', () => {
     expect(botchedError.cause()).toBe(error);
     expect(botchedError.id).toBe('my-id');
     expect(botchedError.code).toBe('my-code');
-    expect(botchedError.statusCode).toBe(500);
-    expect(botchedError.status).toBe('500');
+    expect(botchedError.status).toBe(500);
     expect(botchedError.title).toBe('my-title');
     expect(botchedError.detail).toBe('My Error');
     expect(botchedError.source).toEqual({
@@ -122,8 +121,7 @@ describe('Vanilla Error', () => {
     expect(botchedError.cause()).toBe(error);
     expect(botchedError.id).toBe('my-id');
     expect(botchedError.code).toBe('my-code');
-    expect(botchedError.statusCode).toBe(500);
-    expect(botchedError.status).toBe('500');
+    expect(botchedError.status).toBe(500);
     expect(botchedError.title).toBe('my-title');
     expect(botchedError.detail).toBe('My Error');
     expect(botchedError.source).toEqual({
@@ -144,7 +142,7 @@ describe('VError', () => {
     const botchedError = botch(error);
     expect(error).not.toBe(botchedError);
     expect(botchedError.isBotched).toBe(true);
-    expect(botchedError.statusCode).toBe(500);
+    expect(botchedError.status).toBe(500);
     expect(botchedError.detail).toBe('My Message');
     expect(botchedError.cause()).toBe(error);
     expect(botchedError).toBeInstanceOf(InternalServerError);
@@ -180,8 +178,7 @@ describe('VError', () => {
     expect(botchedError.cause()).toBe(error);
     expect(botchedError.id).toBe('my-id');
     expect(botchedError.code).toBe('my-code');
-    expect(botchedError.statusCode).toBe(500);
-    expect(botchedError.status).toBe('500');
+    expect(botchedError.status).toBe(500);
     expect(botchedError.title).toBe('my-title');
     expect(botchedError.detail).toBe('My Error');
     expect(botchedError.source).toEqual({
@@ -202,7 +199,7 @@ describe('MultiError', () => {
     const botchedError = botch(error);
     expect(error).not.toBe(botchedError);
     expect(botchedError.isBotched).toBe(true);
-    expect(botchedError.statusCode).toBe(500);
+    expect(botchedError.status).toBe(500);
     expect(botchedError.detail).toBe('first of 2 errors: My First Error');
     expect(botchedError.cause()).toBe(error);
     expect(botchedError).toBeInstanceOf(InternalServerError);
@@ -234,8 +231,7 @@ describe('MultiError', () => {
     expect(botchedError.cause()).toBe(error);
     expect(botchedError.id).toBe('my-id');
     expect(botchedError.code).toBe('my-code');
-    expect(botchedError.statusCode).toBe(500);
-    expect(botchedError.status).toBe('500');
+    expect(botchedError.status).toBe(500);
     expect(botchedError.title).toBe('my-title');
     expect(botchedError.detail).toBe('first of 2 errors: My First Error');
     expect(botchedError.source).toEqual({
@@ -272,8 +268,7 @@ describe('MultiError', () => {
     expect(botchedError.cause()).toBe(error);
     expect(botchedError.id).toBe('my-id');
     expect(botchedError.code).toBe('my-code');
-    expect(botchedError.statusCode).toBe(500);
-    expect(botchedError.status).toBe('500');
+    expect(botchedError.status).toBe(500);
     expect(botchedError.title).toBe('my-title');
     expect(botchedError.detail).toBe('first of 2 errors: My First Error');
     expect(botchedError.source).toEqual({

@@ -5,6 +5,6 @@ export class NotExtended extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 510;
+  public static status = 510;
   public static title = 'Not Extended';
 }

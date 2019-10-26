@@ -5,6 +5,6 @@ export class RangeNotSatisfiable extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 416;
+  public static status = 416;
   public static title = 'Range Not Satisfiable';
 }

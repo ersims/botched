@@ -15,8 +15,7 @@ it('should have sane defaults', () => {
   expect(error.name).toBe('BotchedError');
   expect(error.id).toMatch(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
   expect(error.code).toBe('BotchedError');
-  expect(error.statusCode).toBe(500);
-  expect(error.status).toBe('500');
+  expect(error.status).toBe(500);
   expect(error.title).toBe('Internal Server Error');
   expect(error.detail).toBe('My Error');
   expect(error.source).toBe(undefined);
@@ -36,7 +35,7 @@ it('should support additional data', () => {
       id: 'my-id',
       code: 'my-code',
       title: 'my-title',
-      statusCode: 451,
+      status: 451,
       source: {
         pointer: '/data',
         parameter: 'key',
@@ -53,8 +52,7 @@ it('should support additional data', () => {
   expect(error.id).toBe('my-id');
   expect(error.code).toBe('my-code');
   expect(error.title).toBe('my-title');
-  expect(error.statusCode).toBe(451);
-  expect(error.status).toBe('451');
+  expect(error.status).toBe(451);
   expect(error.detail).toBe('My Error');
   expect(error.source).toEqual({
     pointer: '/data',
@@ -73,7 +71,7 @@ it('should NOT inherit from the cause', () => {
       id: 'my-id',
       code: 'my-code',
       title: 'my-title',
-      statusCode: 451,
+      status: 451,
       source: {
         pointer: '/data',
         parameter: 'key',
@@ -87,11 +85,10 @@ it('should NOT inherit from the cause', () => {
     },
     'My Error',
   );
-  const error = new BotchedError({ cause: errorCause, id: 'my-new-id', statusCode: 400 }, 'My New Error');
+  const error = new BotchedError({ cause: errorCause, id: 'my-new-id', status: 400 }, 'My New Error');
   expect(error.id).toBe('my-new-id');
   expect(error.code).toBe('BotchedError');
-  expect(error.statusCode).toBe(400);
-  expect(error.status).toBe('400');
+  expect(error.status).toBe(400);
   expect(error.title).toBe('Internal Server Error');
   expect(error.detail).toBe('My New Error');
   expect(error.source).toBe(undefined);
@@ -104,7 +101,7 @@ it('should serialize to JSON:API spec', () => {
       id: 'my-id',
       code: 'my-code',
       title: 'my-title',
-      statusCode: 451,
+      status: 451,
       source: {
         pointer: '/data',
         parameter: 'key',
@@ -129,7 +126,7 @@ it('should serialize to JSON:API spec', () => {
     code: 'my-code',
     title: 'my-title',
     detail: 'My Error',
-    status: '451',
+    status: 451,
     source: {
       pointer: '/data',
       parameter: 'key',
@@ -143,9 +140,9 @@ it('should serialize to JSON:API spec', () => {
   });
 });
 it('should have convenience property `isServer`', () => {
-  const error1 = new BotchedError({ statusCode: 451 }, 'My Error');
-  const error2 = new BotchedError({ statusCode: 500 }, 'My Error');
-  const error3 = new BotchedError({ statusCode: 501 }, 'My Error');
+  const error1 = new BotchedError({ status: 451 }, 'My Error');
+  const error2 = new BotchedError({ status: 500 }, 'My Error');
+  const error3 = new BotchedError({ status: 501 }, 'My Error');
   expect(error1.isServer).toBe(false);
   expect(error2.isServer).toBe(true);
   expect(error3.isServer).toBe(true);

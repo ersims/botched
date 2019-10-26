@@ -5,6 +5,6 @@ export class NotAcceptable extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 406;
+  public static status = 406;
   public static title = 'Not Acceptable';
 }

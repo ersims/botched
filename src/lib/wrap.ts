@@ -14,7 +14,6 @@ export interface MaybeDetailedError {
     | any;
   headers?: any;
   status?: any;
-  statusCode?: any;
   errors?: any;
 }
 

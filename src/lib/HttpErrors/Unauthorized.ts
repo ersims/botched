@@ -5,6 +5,6 @@ export class Unauthorized extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 401;
+  public static status = 401;
   public static title = 'Unauthorized';
 }

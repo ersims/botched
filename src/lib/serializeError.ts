@@ -13,7 +13,7 @@ export interface SerializedErrorObject {
   source?: BotchedError['source'];
   links?: BotchedError['links'];
   meta?: BotchedError['meta'];
-  statusCode?: BotchedError['statusCode'];
+  status?: BotchedError['status'];
   headers?: BotchedError['headers'];
   isServer?: BotchedError['isServer'];
   isBotched?: BotchedError['isBotched'];

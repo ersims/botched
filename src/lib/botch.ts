@@ -20,7 +20,6 @@ export interface MaybeDetailedError {
       }
     | any;
   status?: any;
-  statusCode?: any;
   errors?: any;
   headers?: any;
   id?: any;
@@ -45,12 +44,12 @@ function botch(err: Error & MaybeDetailedError): BotchedError {
   if (isBotched(err)) return err;
 
   // Extract any default information
-  const statusCode = getStatusCode(err);
+  const status = getStatusCode(err);
   const data = (typeof err.data === 'object' && err.data) || VError.info(err);
   const headers = err.headers || err.headers || data.headers || data.headers;
 
   return createError(
-    statusCode,
+    status,
     {
       headers,
       id: err.id || data.id,

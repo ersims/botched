@@ -5,6 +5,6 @@ export class LoopDetected extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 508;
+  public static status = 508;
   public static title = 'Loop Detected';
 }

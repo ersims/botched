@@ -5,6 +5,6 @@ export class ProxyAuthenticationRequired extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 407;
+  public static status = 407;
   public static title = 'Proxy Authentication Required';
 }

@@ -5,6 +5,6 @@ export class UnsupportedMediaType extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 415;
+  public static status = 415;
   public static title = 'Unsupported Media Type';
 }

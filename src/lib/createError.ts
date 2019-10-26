@@ -28,7 +28,7 @@ function createError<T extends keyof StatusCodeToHttpError>(
 
   // Create a BotchedError class for this missing Http Error
   const botchedError = new BotchedError(...args);
-  botchedError.statusCode = statusCode;
+  botchedError.status = statusCode;
   return botchedError;
 }
 

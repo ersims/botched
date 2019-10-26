@@ -5,6 +5,6 @@ export class BadGateway extends BotchedError {
   /**
    * @override
    */
-  public static statusCode = 502;
+  public static status = 502;
   public static title = 'Bad Gateway';
 }
