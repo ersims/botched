@@ -72,6 +72,7 @@ function smartSerialize<T extends object>(
         else if (!circularRef.has(value)) acc[key] = smartSerialize(value, maxDepth - 1, circularRef);
         else acc[key] = '[Circular]';
       }
+
       return acc;
     }, {});
 }

@@ -169,8 +169,7 @@ export default class BotchedError extends WError {
   }
 
   /**
-   * Create a JSON friendly representation of this error
-   * Defaults to the JSON:API spec
+   * Create a JSON friendly representation of this error with only non-sensitive properties
    *
    * @return {object}
    */
@@ -179,6 +178,24 @@ export default class BotchedError extends WError {
       id: this.id,
       code: this.code,
       status: this.status,
+      title: this.title,
+      detail: this.detail,
+      source: this.source,
+      links: this.links,
+      meta: this.meta,
+    };
+  }
+
+  /**
+   * Create a JSON:API representation of this error with only non-sensitive properties
+   *
+   * @return {object}
+   */
+  public toJSONApi(): object {
+    return {
+      id: this.id,
+      code: this.code,
+      status: this.status.toString(),
       title: this.title,
       detail: this.detail,
       source: this.source,

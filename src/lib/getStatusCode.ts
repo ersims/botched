@@ -1,36 +1,20 @@
 import { VError } from 'verror';
-
-// Types
-export interface MaybeDetailedError {
-  data?:
-    | {
-        status?: any;
-        statusCode?: any;
-      }
-    | any;
-  status?: any;
-  statusCode?: any;
-  isBotched?: boolean;
-  errors?: any;
-}
+import { MaybeDetailedError } from './botch';
 
 /**
- * Find a logical http status code from a variety of error types
+ * Find a reasonable http status code from a variety of error types
  *
  * @param {Error} err
  * @returns {number}
  */
-function getStatusCode(err: Error & MaybeDetailedError): number {
-  // Extract any default information
+function getStatusCode(err: MaybeDetailedError): number {
   const data = (typeof err.data === 'object' && err.data) || {};
-  let statusCode = err.status || err.statusCode || data.status || data.statusCode;
+  let statusCode = err.status || data.status;
 
   // Check for MultiError and find the most appropriate common status code
   if (err.errors && typeof err.errors === 'function' && !statusCode) {
-    const errors: (Error & MaybeDetailedError)[] = err.errors();
-
-    // Extract the most logical common status code
-    errors.some(error => {
+    // Should we default to 400 or 500?
+    err.errors().some((error: MaybeDetailedError) => {
       const subStatusCode = getStatusCode(error);
 
       // Should we try to find a common status code (either 400 or 500)?
@@ -46,10 +30,10 @@ function getStatusCode(err: Error & MaybeDetailedError): number {
     });
   } else if (!statusCode) {
     const info = VError.info(err);
-    statusCode = info.statusCode || info.status || 500;
+    statusCode = info.status || info.statusCode || 500;
   }
 
-  // Return final statusCode and default to 500
+  // Return final statusCode if valid or default to 500
   return statusCode >= 400 ? statusCode : 500;
 }
 

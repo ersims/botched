@@ -1,7 +1,7 @@
 import BotchedError from './BotchedError';
 
 // Types
-export interface MaybeBotchedError {
+export interface MaybeBotchedError extends Error {
   isBotched?: boolean;
 }
 
@@ -11,7 +11,7 @@ export interface MaybeBotchedError {
  * @param {Error} err
  * @returns {boolean}
  */
-function isBotched(err: Error & MaybeBotchedError): err is BotchedError {
+function isBotched(err: MaybeBotchedError): err is BotchedError {
   return !!err.isBotched;
 }
 
