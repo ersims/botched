@@ -1,4 +1,4 @@
-import BotchedError from './BotchedError';
+import { BotchedError } from './BotchedError';
 
 // Types
 export interface MaybeBotchedError extends Error {
@@ -16,4 +16,4 @@ function isBotched(err: MaybeBotchedError): err is BotchedError {
 }
 
 // Exports
-export default isBotched;
+export { isBotched };

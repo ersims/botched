@@ -1,4 +1,4 @@
-import createSerializer from '../../../src/lib/serializeError';
+import { createSerializer } from '../../../src/lib/serializeError';
 import { BadRequest, InternalServerError } from '../../../src/lib/HttpErrors';
 
 // Create a default serializer for re-use

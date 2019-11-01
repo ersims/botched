@@ -1,10 +1,12 @@
 import { MultiError, VError } from 'verror';
-import botch, { MaybeDetailedError } from '../../../src/lib/botch';
+import { botch, MaybeDetailedError } from '../../../src/lib/botch';
 import { InternalServerError, UnprocessableEntity } from '../../../src/lib/HttpErrors';
-import getStatusCode from '../../../src/lib/getStatusCode';
+import { getStatusCode } from '../../../src/lib/getStatusCode';
 
 // Mocks
-jest.mock('../../../src/lib/getStatusCode');
+jest.mock('../../../src/lib/getStatusCode', () => ({
+  getStatusCode: jest.fn(),
+}));
 const getStatusCodeMock = getStatusCode as jest.Mock;
 
 // Init
@@ -26,7 +28,7 @@ detailedError.status = 498;
 
 // Tests
 it('should use getStatusCode for status codes', () => {
-  // Force change status code
+  // Force override status code
   getStatusCodeMock.mockReturnValueOnce(499);
   const botchedError = botch(detailedError);
 
@@ -34,7 +36,7 @@ it('should use getStatusCode for status codes', () => {
   expect(botchedError.status).toBe(499);
   expect(getStatusCodeMock).toHaveBeenCalledWith(expect.objectContaining({ status: 498 }));
 });
-it('should only inherit status by default', () => {
+it('should inherit all props by default', () => {
   // Force change status code
   getStatusCodeMock.mockReturnValueOnce(498);
   const botchedError = botch(detailedError);
@@ -42,26 +44,9 @@ it('should only inherit status by default', () => {
   // Assertions
   expect(botchedError.isBotched).toBe(true);
   expect(botchedError.cause()).toBe(detailedError);
-  expect(botchedError.id).toMatch(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
-  expect(botchedError.code).toBe('BotchedError');
-  expect(botchedError.status).toBe(498);
-  expect(botchedError.title).toBe('Internal Server Error');
-  expect(botchedError.detail).toBeUndefined();
-  expect(botchedError.source).toBeUndefined();
-  expect(botchedError.links).toBeUndefined();
-  expect(botchedError.meta).toBeUndefined();
-});
-it('should inherit properties when using `useUnsafeErrorProps`', () => {
-  // Force change status code
-  getStatusCodeMock.mockReturnValueOnce(497);
-  const botchedError = botch(detailedError, { useUnsafeErrorProps: true });
-
-  // Assertions
-  expect(botchedError.isBotched).toBe(true);
-  expect(botchedError.cause()).toBe(detailedError);
   expect(botchedError.id).toBe('my-id');
   expect(botchedError.code).toBe('my-code');
-  expect(botchedError.status).toBe(497);
+  expect(botchedError.status).toBe(498);
   expect(botchedError.title).toBe('my-title');
   expect(botchedError.detail).toBe('My Message');
   expect(botchedError.source).toEqual({
@@ -76,35 +61,12 @@ it('should inherit properties when using `useUnsafeErrorProps`', () => {
   });
 });
 describe('BotchedError', () => {
-  it('should not touch a botched http error with status 400-499', () => {
+  it('should return the botched error directly', () => {
     const error = new UnprocessableEntity('My Message');
     const botchedError = botch(error);
-    expect(error.isBotched).toBe(true);
+
+    // Assertions
     expect(error).toBe(botchedError);
-    expect(botchedError.isBotched).toBe(true);
-    expect(botchedError.status).toBe(422);
-    expect(botchedError.detail).toBe('My Message');
-    expect(botchedError.cause()).toBe(undefined);
-  });
-  it('should not touch a botched http error with status >= 500', () => {
-    const error = new InternalServerError('My Message');
-    const botchedError = botch(error);
-    expect(error.isBotched).toBe(true);
-    expect(error).toBe(botchedError);
-    expect(botchedError.isBotched).toBe(true);
-    expect(botchedError.status).toBe(500);
-    expect(botchedError.detail).toBe('My Message');
-    expect(botchedError.cause()).toBe(undefined);
-  });
-  it('should not touch a BotchedError with invalid statusCode', () => {
-    const error = new InternalServerError({ status: 101 }, 'My Message');
-    const botchedError = botch(error);
-    expect(error.isBotched).toBe(true);
-    expect(error).toBe(botchedError);
-    expect(botchedError.isBotched).toBe(true);
-    expect(botchedError.status).toBe(101);
-    expect(botchedError.detail).toBe('My Message');
-    expect(botchedError.cause()).toBe(undefined);
   });
 });
 describe('Vanilla Error', () => {
@@ -120,7 +82,7 @@ describe('Vanilla Error', () => {
     expect(botchedError.code).toBe('InternalServerError');
     expect(botchedError.status).toBe(500);
     expect(botchedError.title).toBe('Internal Server Error');
-    expect(botchedError.detail).toBeUndefined();
+    expect(botchedError.detail).toBe('My Message');
     expect(botchedError.source).toBeUndefined();
     expect(botchedError.links).toBeUndefined();
     expect(botchedError.meta).toBeUndefined();
@@ -138,7 +100,7 @@ describe('VError', () => {
     expect(botchedError.code).toBe('InternalServerError');
     expect(botchedError.status).toBe(500);
     expect(botchedError.title).toBe('Internal Server Error');
-    expect(botchedError.detail).toBeUndefined();
+    expect(botchedError.detail).toBe('My Message');
     expect(botchedError.source).toBeUndefined();
     expect(botchedError.links).toBeUndefined();
     expect(botchedError.meta).toBeUndefined();

@@ -1,12 +1,13 @@
 import VError from 'verror';
 import * as Exports from '../../src';
-import BotchedError from '../../src/lib/BotchedError';
-import createError from '../../src/lib/createError';
-import createSerializer from '../../src/lib/serializeError';
-import serializeJSONAPIError from '../../src/lib/serializeJSONAPIError';
-import getStatusCode from '../../src/lib/getStatusCode';
-import isBotched from '../../src/lib/isBotched';
-import botch from '../../src/lib/botch';
+import { BotchedError } from '../../src/lib/BotchedError';
+import { createError } from '../../src/lib/createError';
+import { createSerializer } from '../../src/lib/serializeError';
+import { serializeJSONAPIError } from '../../src/lib/serializeJSONAPIError';
+import { getStatusCode } from '../../src/lib/getStatusCode';
+import { isBotched } from '../../src/lib/isBotched';
+import { botch } from '../../src/lib/botch';
+import { wrap } from '../../src/lib/wrap';
 import * as HttpErrors from '../../src/lib/HttpErrors';
 
 // Tests
@@ -30,6 +31,9 @@ it('should export isBotched helper', () => {
 });
 it('should export botch helper', () => {
   expect(Exports.botch).toBe(botch);
+});
+it('should export wrap helper', () => {
+  expect(Exports.wrap).toBe(wrap);
 });
 it('should export all Error classes', () => {
   // One export is httpErrorCodes - everything else should be the errors

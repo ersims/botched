@@ -1,4 +1,4 @@
-import BotchedError, { ErrorOptions } from './BotchedError';
+import { BotchedError, BotchedErrorOptions } from './BotchedError';
 import { httpErrorCodes } from './HttpErrors';
 
 // Types
@@ -8,13 +8,13 @@ export type StatusCodeToHttpError = { [P in keyof httpErrorCodesPreset]: Instanc
 // Init
 function createError<T extends keyof StatusCodeToHttpError>(
   statusCode: T | number,
-  message?: string,
+  message: string,
   ...params: any[]
 ): StatusCodeToHttpError[T];
 function createError<T extends keyof StatusCodeToHttpError>(
-  statusCode?: T | number,
-  options?: ErrorOptions | Error,
-  message?: string,
+  statusCode: T | number,
+  options: BotchedErrorOptions | Error,
+  message: string,
   ...params: any[]
 ): StatusCodeToHttpError[T];
 function createError<T extends keyof StatusCodeToHttpError>(
@@ -23,7 +23,6 @@ function createError<T extends keyof StatusCodeToHttpError>(
 ): StatusCodeToHttpError[T] {
   // Verify statusCode >= 400
   if (statusCode < 400) throw new Error('statusCode must be 400 or greater');
-
   if (statusCode in httpErrorCodes) return new (httpErrorCodes as httpErrorCodesPreset)[statusCode](...args);
 
   // Create a BotchedError class for this missing Http Error
@@ -33,4 +32,4 @@ function createError<T extends keyof StatusCodeToHttpError>(
 }
 
 // Exports
-export default createError;
+export { createError };

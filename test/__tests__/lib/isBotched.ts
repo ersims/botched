@@ -1,6 +1,6 @@
 import { MultiError, VError, WError } from 'verror';
-import BotchedError from '../../../src/lib/BotchedError';
-import isBotched from '../../../src/lib/isBotched';
+import { BotchedError } from '../../../src/lib/BotchedError';
+import { isBotched } from '../../../src/lib/isBotched';
 import { BadRequest, InternalServerError } from '../../../src/lib/HttpErrors';
 
 // Tests

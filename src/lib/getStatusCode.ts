@@ -38,4 +38,4 @@ function getStatusCode(err: MaybeDetailedError): number {
 }
 
 // Exports
-export default getStatusCode;
+export { getStatusCode };

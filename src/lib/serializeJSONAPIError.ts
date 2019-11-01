@@ -1,6 +1,6 @@
 import { VError } from 'verror';
 import { Link, Meta } from './BotchedError';
-import botch, { MaybeDetailedError } from './botch';
+import { botch, MaybeDetailedError } from './botch';
 
 // Types
 export interface JSONAPIError {
@@ -39,4 +39,4 @@ function serializeJSONAPIError(err: MaybeDetailedError): JSONAPIError {
 }
 
 // Exports
-export default serializeJSONAPIError;
+export { serializeJSONAPIError };

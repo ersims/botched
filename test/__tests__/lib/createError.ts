@@ -1,6 +1,6 @@
 import { STATUS_CODES } from 'http';
-import BotchedError from '../../../src/lib/BotchedError';
-import createError from '../../../src/lib/createError';
+import { BotchedError } from '../../../src/lib/BotchedError';
+import { createError } from '../../../src/lib/createError';
 
 // Get relevant status codes
 const errorCodes = Object.keys(STATUS_CODES)

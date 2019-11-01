@@ -1,5 +1,5 @@
 import VError from 'verror';
-import BotchedError from './BotchedError';
+import { BotchedError } from './BotchedError';
 
 // Types
 export interface SerializedErrorObject {
@@ -95,4 +95,4 @@ function createSerializer(options?: SerializeErrorOptions) {
 }
 
 // Exports
-export default createSerializer;
+export { createSerializer };

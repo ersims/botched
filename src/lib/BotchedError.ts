@@ -13,7 +13,7 @@ export interface Source {
 export interface Meta {
   [key: string]: any;
 }
-export interface ErrorOptions extends BaseError.Options {
+export interface BotchedErrorOptions extends BaseError.Options {
   id?: BotchedError['id'];
   code?: BotchedError['code'];
   title?: BotchedError['title'];
@@ -25,7 +25,7 @@ export interface ErrorOptions extends BaseError.Options {
 }
 
 // Exports
-export default class BotchedError extends WError {
+export class BotchedError extends WError {
   // The botched library version
   public static readonly version: string = version;
 
@@ -136,8 +136,8 @@ export default class BotchedError extends WError {
    * Thin layer on top of "verror"
    * @see https://github.com/joyent/node-verror
    */
-  public constructor(message?: string, ...params: any[]);
-  public constructor(options?: ErrorOptions | Error, message?: string, ...params: any[]);
+  public constructor(message: string, ...params: any[]);
+  public constructor(options: BotchedErrorOptions | Error, message: string, ...params: any[]);
   public constructor(...args: any[]) {
     super(...args);
 

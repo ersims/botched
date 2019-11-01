@@ -1,8 +1,8 @@
 import { VError } from 'verror';
-import BotchedError from './BotchedError';
-import createError from './createError';
-import getStatusCode from './getStatusCode';
-import isBotched from './isBotched';
+import { BotchedError } from './BotchedError';
+import { createError } from './createError';
+import { getStatusCode } from './getStatusCode';
+import { isBotched } from './isBotched';
 
 // Types
 export interface MaybeDetailedError extends Error {
@@ -29,40 +29,32 @@ export interface MaybeDetailedError extends Error {
   links?: any;
   meta?: any;
 }
-export interface BotchOptions {
-  // Trust error properties - other than the status code?
-  useUnsafeErrorProps?: boolean;
-}
 
 /**
- * Create a botch http error or return the existing error if it is already a botched http error.
+ * Create a botched error based on a generic error. This will return the error directly if it is
+ * already a botched error or create a new error while inheriting props like id, data, headers etc.
+ * Note that this is *NOT* safe to use if errors may contain sensitive information. Only use this
+ * if you know what errors you are dealing with.
  *
- * Use the `useUnsafeErrorProps` option if you trust the error to not contain any sensitive information
- * and would like to hoist common error properties such as id, code, title, source, links and meta to the
- * created error.
+ * See `wrap` for a safe alternative
  *
  * @param {Error} err
- * @param {BotchOptions=} options
  * @returns {BotchedError}
  */
-function botch(err: MaybeDetailedError, options: BotchOptions = { useUnsafeErrorProps: false }): BotchedError {
+function botch(err: MaybeDetailedError): BotchedError {
   // Return fast?
   if (isBotched(err)) return err;
 
   // Extract any default information
   const status = getStatusCode(err);
-  console.log(status)
-  // Create a safe botch error?
-  if (!options || !options.useUnsafeErrorProps) return createError(status, { cause: err });
 
   // Extract potentially unsafe properties
   const data = (typeof err.data === 'object' && err.data) || VError.info(err);
-  const headers = err.headers || err.headers || data.headers || data.headers;
 
   return createError(
     status,
     {
-      headers,
+      headers: err.headers || data.headers,
       id: err.id || data.id,
       code: err.code || data.code,
       title: err.title || data.title,
@@ -76,4 +68,4 @@ function botch(err: MaybeDetailedError, options: BotchOptions = { useUnsafeError
 }
 
 // Exports
-export default botch;
+export { botch };

@@ -1,4 +1,4 @@
-import BotchedError from '../BotchedError';
+import { BotchedError } from '../BotchedError';
 
 // Exports
 export class URITooLong extends BotchedError {
