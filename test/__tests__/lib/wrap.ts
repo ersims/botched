@@ -44,14 +44,14 @@ it('should create errors with only cause property by default', () => {
   const botchedError = wrap(detailedError);
 
   // Assertions
-  expect(createError).toHaveBeenCalledWith(498, { cause: detailedError }, undefined);
+  expect(createError).toHaveBeenCalledWith(498, { cause: detailedError });
   expect(botchedError.isBotched).toBe(true);
   expect(botchedError.status).toBe(498);
   expect(botchedError.cause()).toBe(detailedError);
   expect(botchedError.id).toMatch(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
   expect(botchedError.code).toBe('BotchedError');
   expect(botchedError.title).toBe('Internal Server Error');
-  expect(botchedError.message).toBeUndefined();
+  expect(botchedError.message).toBe('');
   expect(botchedError.source).toBeUndefined();
   expect(botchedError.links).toBeUndefined();
   expect(botchedError.meta).toBeUndefined();

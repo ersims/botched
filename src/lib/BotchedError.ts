@@ -136,8 +136,8 @@ export class BotchedError extends WError {
    * Thin layer on top of "verror"
    * @see https://github.com/joyent/node-verror
    */
-  public constructor(message: string, ...params: any[]);
-  public constructor(options: BotchedErrorOptions | Error, message: string, ...params: any[]);
+  public constructor(message?: string, ...params: any[]);
+  public constructor(optionsOrError?: BotchedErrorOptions | Error, message?: string, ...params: any[]);
   public constructor(...args: any[]) {
     super(...args);
 
