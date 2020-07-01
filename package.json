@@ -57,7 +57,7 @@
   },
   "dependencies": {
     "@types/verror": "^1.10.3",
-    "uuid": "^3.3.3",
+    "uuid": "^8.0.0",
     "verror": "^1.10.0"
   },
   "devDependencies": {
@@ -65,7 +65,7 @@
     "@commitlint/config-conventional": "^8.1.0",
     "@types/jest": "^24.0.18",
     "@types/node": "^12.7.2",
-    "@types/uuid": "^3.4.5",
+    "@types/uuid": "^8.0.0",
     "@typescript-eslint/eslint-plugin": "^2.0.0",
     "@typescript-eslint/parser": "^2.0.0",
     "conventional-changelog-cli": "^2.0.23",
