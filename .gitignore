@@ -21,6 +21,7 @@
 !.github
 !.gitlab
 !.dockerignore
+!.mergify.yml
 
 # Generated directories
 build
