@@ -1,12 +1,18 @@
 name: Build and Test
-on: [push]
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
 jobs:
   test:
     name: Node v${{ matrix.node_version }} on ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        node_version: [8, 10, 12]
+        node_version: [12, 14, 16]
         os: [ubuntu-latest, windows-latest, macos-latest]
 
     steps:
@@ -17,11 +23,14 @@ jobs:
         with:
           node-version: ${{ matrix.node_version }}
 
-      - name: npm install
-        run: npm install
+      - name: npm ci
+        run: npm ci
 
-      - name: npm -v && node -v
-        run: npm -v && node -v
+      - name: npm -v
+        run: npm -v
+
+      - name: node -v
+        run: node -v
 
       - name: npm run build
         run: npm run build

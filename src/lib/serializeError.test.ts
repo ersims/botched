@@ -1,5 +1,5 @@
-import createSerializer from '../../../src/lib/serializeError';
-import { BadRequest, InternalServerError } from '../../../src/lib/HttpErrors';
+import createSerializer from './serializeError';
+import { BadRequest, InternalServerError } from './HttpErrors';
 
 // Create a default serializer for re-use
 const serialize = createSerializer();
@@ -46,7 +46,9 @@ it('should support disabling full stack', () => {
     meta: undefined,
     source: undefined,
     links: undefined,
-    id: expect.stringMatching(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i),
+    id: expect.stringMatching(
+      /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+    ),
     isBotched: true,
     isServer: true,
     stack: expect.not.stringContaining('Error: My Nested Message'),
@@ -203,7 +205,9 @@ it('should show the full nested stack by default', () => {
     meta: undefined,
     source: undefined,
     links: undefined,
-    id: expect.stringMatching(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i),
+    id: expect.stringMatching(
+      /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+    ),
     isBotched: true,
     isServer: true,
     stack: expect.stringContaining('Error: My Nested Message'),

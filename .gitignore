@@ -3,6 +3,7 @@
 
 # Exceptions
 !.babelrc*
+!.browserslistrc
 !.env.example
 !.eslintrc*
 !.eslintignore
@@ -18,12 +19,16 @@
 !.gitlab-ci.yml
 !.dependabot
 !.github
+!.gitlab
+!.dockerignore
 
 # Generated directories
 build
 coverage
 dist
 node_modules
+cdk.out
+cdk.context.json
 
 # Other potentionally conflicting files
 *.db
@@ -32,4 +37,5 @@ node_modules
 *.tmp
 *.log
 npm-debug.log*
-yarn.lock
+*.lerna_backup
+*.tsbuildinfo

@@ -1,11 +1,11 @@
 import { STATUS_CODES } from 'http';
-import BotchedError from '../../../src/lib/BotchedError';
-import createError from '../../../src/lib/createError';
+import BotchedError from './BotchedError';
+import createError from './createError';
 
 // Get relevant status codes
 const errorCodes = Object.keys(STATUS_CODES)
-  .map(code => parseInt(code, 10))
-  .filter(code => code >= 400);
+  .map((code) => parseInt(code, 10))
+  .filter((code) => code >= 400);
 
 // Explicit overrides
 const overrides: { [key: number]: string } = {
@@ -17,7 +17,7 @@ const overrides: { [key: number]: string } = {
 it('should create all errors from STATUS_CODES', () => {
   const codes = errorCodes.slice(0);
   expect.assertions(codes.length * 5);
-  codes.forEach(code => {
+  codes.forEach((code) => {
     const error = createError(code);
     expect(error.statusCode).toBe(code);
     expect(error.status).toBe(code.toString());

@@ -1,14 +1,15 @@
+// Exports
 module.exports = {
   parser: '@typescript-eslint/parser',
   env: {
-    node: true,
     browser: false,
     es6: true,
+    node: true,
   },
   overrides: [
-    // Test environment
+    // Test env
     {
-      files: ['test/**'],
+      files: ['*/test/**', '**/*.test.*', '**/__tests__/**'],
       env: {
         jest: true,
       },
@@ -21,10 +22,9 @@ module.exports = {
         'jest/valid-expect': 'error',
       },
     },
-
-    // Dev dependencies
+    // Dev deps
     {
-      files: ['test/**', 'types/**'],
+      files: ['*/test/**', '**/*.test.*', '**/__tests__/**', '*/types/**'],
       rules: {
         'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
       },
@@ -35,26 +35,42 @@ module.exports = {
     'plugin:@typescript-eslint/recommended',
     'plugin:import/typescript',
     'prettier',
-    'prettier/@typescript-eslint',
   ],
-  settings: {
-    'import/extensions': ['.js', '.jsx'],
-    'import/ignore': [/node_modules/],
-  },
   rules: {
-    // Replaced by typescript equivalent below
-    'no-useless-constructor': 0,
+    // Make rules stricter
+    '@typescript-eslint/explicit-module-boundary-types': 'error',
+    '@typescript-eslint/no-unused-vars': 'error',
     '@typescript-eslint/no-useless-constructor': 'error',
+    '@typescript-eslint/no-use-before-define': 'error',
+    '@typescript-eslint/no-shadow': 'error',
 
-    // Disabled as named exports are maybe preferred
-    'import/prefer-default-export': 0,
+    // Replaced by typescript equivalent above
+    'no-useless-constructor': 'off',
+    'no-use-before-define': 'off',
+    'no-shadow': 'off',
 
-    'lines-between-class-members': 0,
-    'no-dupe-class-members': 0,
-    'no-restricted-syntax': [2, 'LabeledStatement', 'WithStatement'],
-    '@typescript-eslint/array-type': 0,
-    '@typescript-eslint/no-explicit-any': 0,
-    '@typescript-eslint/explicit-function-return-type': 0,
-    '@typescript-eslint/no-empty-interface': 0,
+    // Disabled as named exports are preferred
+    'import/prefer-default-export': 'off',
+    'import/extensions': [
+      'error',
+      'ignorePackages',
+      {
+        js: 'never',
+        jsx: 'never',
+        ts: 'never',
+        tsx: 'never',
+        mjs: 'never',
+        json: 'never',
+      },
+    ],
+
+    // Preferences
+    'lines-between-class-members': 'off',
+    'no-dupe-class-members': 'off',
+    'no-restricted-syntax': ['error', 'LabeledStatement', 'WithStatement'],
+    '@typescript-eslint/array-type': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-empty-interface': 'off',
   },
 };

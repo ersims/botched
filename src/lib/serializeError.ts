@@ -36,13 +36,17 @@ const ignoreProperties = ['jse_info', 'jse_cause', 'jse_shortmsg'];
  * @param {object} source
  */
 function getExtraProps(source: SerializableError): [string, object | null][] {
-  const out = ['name', 'message', 'stack', 'code'].reduce<[string, object | null][]>((acc, knownProp) => {
-    if (typeof source[knownProp] === 'string') acc.push([knownProp, source[knownProp]]);
-    return acc;
-  }, []);
+  const out = ['name', 'message', 'stack', 'code'].reduce<[string, object | null][]>(
+    (acc, knownProp) => {
+      if (typeof source[knownProp] === 'string') acc.push([knownProp, source[knownProp]]);
+      return acc;
+    },
+    [],
+  );
   if (source instanceof Error) {
     if (!(source as SerializableError).info) out.push(['info', VError.info(source)]);
-    if (typeof (source as VError).cause === 'function') out.push(['cause', (source as VError).cause() || null]);
+    if (typeof (source as VError).cause === 'function')
+      out.push(['cause', (source as VError).cause() || null]);
   }
 
   return out;
@@ -69,7 +73,8 @@ function smartSerialize<T extends object>(
     .reduce<{ [key: string]: object | string | number | undefined | null }>((acc, [key, value]) => {
       if (typeof value !== 'function' && !ignoreProperties.includes(key)) {
         if (!value || typeof value !== 'object') acc[key] = value;
-        else if (!circularRef.has(value)) acc[key] = smartSerialize(value, maxDepth - 1, circularRef);
+        else if (!circularRef.has(value))
+          acc[key] = smartSerialize(value, maxDepth - 1, circularRef);
         else acc[key] = '[Circular]';
       }
       return acc;
@@ -82,7 +87,9 @@ function smartSerialize<T extends object>(
  * @param {SerializeErrorOptions} options - use maxDepth -1 for infinite depth
  * @returns {Function}
  */
-function createSerializer(options?: SerializeErrorOptions) {
+function createSerializer(
+  options?: SerializeErrorOptions,
+): (error: Error & Partial<BotchedError>) => SerializedErrorObject {
   const opts = { fullStack: true, maxDepth: 10, ...options };
   return function serialize(error: Error & Partial<BotchedError>): SerializedErrorObject {
     const serializedError = smartSerialize(error, opts.maxDepth);

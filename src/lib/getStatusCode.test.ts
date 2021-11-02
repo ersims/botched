@@ -1,7 +1,7 @@
 import { MultiError, VError } from 'verror';
-import BotchedError from '../../../src/lib/BotchedError';
-import { Forbidden, GatewayTimeout, UnprocessableEntity } from '../../../src/lib/HttpErrors';
-import getStatusCode from '../../../src/lib/getStatusCode';
+import BotchedError from './BotchedError';
+import { Forbidden, GatewayTimeout, UnprocessableEntity } from './HttpErrors';
+import getStatusCode from './getStatusCode';
 
 // Tests
 describe('BotchedError', () => {

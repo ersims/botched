@@ -3,11 +3,8 @@
 Better error handling with JSON:API friendly error objects - inspired by [restify-errors][restify-errors-url], [verror][verror-url] and [boom][boom-url].
 
 [![npm][npm-image]][npm-url]
-[![CircleCI][circleci-image]][circleci-url]
-[![Codecov branch][codecov-image]][codecov-url]
-[![David][david-image]][david-url]
+[![GitHub][github-ci-image]][github-ci-url]
 [![Known Vulnerabilities][snyk-image]][snyk-url]
-[![renovate-app badge][renovate-image]][renovate-url]
 [![Conventional Commits][conventional-commits-image]][conventional-commits-url]
 [![license][license-image]][license-url]
 
@@ -222,19 +219,15 @@ Returns true if the error is a [BotchedError](#api-botched-error).
 [repo-url]: https://github.com/ersims/botched
 [npm-url]: https://npmjs.org/package/botched
 [npm-image]: https://img.shields.io/npm/v/botched.svg
-[circleci-url]: https://circleci.com/gh/ersims/botched/tree/master
-[circleci-image]: https://img.shields.io/circleci/project/github/ersims/botched/master.svg
-[codecov-url]: https://codecov.io/gh/ersims/botched/tree/master
-[codecov-image]: https://img.shields.io/codecov/c/github/ersims/botched/master.svg
-[david-url]: https://david-dm.org/ersims/botched/master
-[david-image]: https://img.shields.io/david/ersims/botched.svg
-[snyk-url]: https://snyk.io/test/github/ersims/botched/master
-[snyk-image]: https://snyk.io/test/github/ersims/botched/master/badge.svg
+[github-ci-url]: https://github.com/ersims/botched/actions
+[github-ci-image]: https://img.shields.io/github/workflow/status/ersims/botched/Build%20and%20Test
+[snyk-url]: https://snyk.io/test/github/ersims/botched/main
+[snyk-image]: https://snyk.io/test/github/ersims/botched/main/badge.svg
 [renovate-url]: https://renovateapp.com/
 [renovate-image]: https://img.shields.io/badge/renovate-app-blue.svg
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [conventional-commits-url]: https://conventionalcommits.org/
-[license-url]: https://github.com/ersims/botched/blob/master/LICENSE.md
+[license-url]: https://github.com/ersims/botched/blob/main/LICENSE.md
 [license-image]: https://img.shields.io/github/license/ersims/botched.svg
 [restify-errors-url]: https://github.com/restify/errors
 [boom-url]: https://github.com/hapijs/boom

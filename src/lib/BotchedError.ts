@@ -47,7 +47,7 @@ export default class BotchedError extends WError {
    * @param {any[]} args
    * @returns {object}
    */
-  public static getOptionsFromArgs(args: any[]) {
+  public static getOptionsFromArgs(args: any[]): Record<string, unknown> {
     return (args && args[0] && typeof args[0] === 'object' && args[0]) || {};
   }
 
@@ -121,16 +121,16 @@ export default class BotchedError extends WError {
   public headers: { [key: string]: string } = (this.constructor as typeof BotchedError).headers;
 
   /**
-   * HTTP Status code in string format
+   * HTTP Status code as string
    */
-  public get status() {
+  public get status(): string {
     return this.statusCode.toString();
   }
 
   /**
    * Botched error version
    */
-  public get version() {
+  public get version(): string {
     return (this.constructor as typeof BotchedError).version;
   }
 

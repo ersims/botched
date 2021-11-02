@@ -1,14 +1,17 @@
 {
   "compilerOptions": {
+    "noUncheckedIndexedAccess": true,
     "diagnostics": false,
     "declaration": true,
     "traceResolution": false,
-    "allowJs": false,
-    "checkJs": false,
-    "jsx": "react",
-    "noEmit": false,
-    "target": "es2017",
+    "incremental": true,
+    "allowJs": true,
+    "checkJs": true,
+    "noEmit": true,
+    "jsx": "preserve",
+    "target": "ES2018",
     "module": "commonjs",
+    "lib": ["es2019"],
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -25,10 +28,7 @@
     "pretty": true,
     "sourceMap": true,
     "forceConsistentCasingInFileNames": true,
-    "skipLibCheck": false,
-    "resolveJsonModule": true,
-    "outDir": "dist",
-    "rootDir": "src"
-  },
-  "include": ["types", "src"]
+    "skipLibCheck": true,
+    "resolveJsonModule": true
+  }
 }

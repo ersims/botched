@@ -30,13 +30,14 @@ function getStatusCode(err: Error & MaybeDetailedError): number {
     const errors: (Error & MaybeDetailedError)[] = err.errors();
 
     // Extract the most logical common status code
-    errors.some(error => {
+    errors.some((error) => {
       const subStatusCode = getStatusCode(error);
 
       // Should we try to find a common status code (either 400 or 500)?
       if (statusCode && subStatusCode !== statusCode) {
         // Default to 400?
-        if (statusCode >= 400 && statusCode < 500 && subStatusCode >= 400 && subStatusCode < 500) statusCode = 400;
+        if (statusCode >= 400 && statusCode < 500 && subStatusCode >= 400 && subStatusCode < 500)
+          statusCode = 400;
         // Fallback to 500
         else statusCode = 500;
       } else statusCode = subStatusCode;

@@ -1,7 +1,7 @@
 import { MultiError, VError, WError } from 'verror';
-import BotchedError from '../../../src/lib/BotchedError';
-import isBotched from '../../../src/lib/isBotched';
-import { BadRequest, InternalServerError } from '../../../src/lib/HttpErrors';
+import BotchedError from './BotchedError';
+import isBotched from './isBotched';
+import { BadRequest, InternalServerError } from './HttpErrors';
 
 // Tests
 describe('Botched Errors', () => {
@@ -32,7 +32,10 @@ describe('VError', () => {
     expect(isBotched(error)).toBe(false);
   });
   it('should return false for MultiError', () => {
-    const error = new MultiError([new Error('My First Error'), new BotchedError('My Botched sub error')]);
+    const error = new MultiError([
+      new Error('My First Error'),
+      new BotchedError('My Botched sub error'),
+    ]);
     expect(isBotched(error)).toBe(false);
   });
 });

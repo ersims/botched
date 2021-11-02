@@ -1,7 +1,7 @@
-import BotchedError from '../../../src/lib/BotchedError';
+import BotchedError from './BotchedError';
 
 // eslint-disable-next-line @typescript-eslint/no-var-requires
-const { version } = require('../../../package.json');
+const { version } = require('../../package.json');
 
 // Tests
 it('should have a version number', () => {
@@ -13,7 +13,9 @@ it('should have a version number', () => {
 it('should have sane defaults', () => {
   const error = new BotchedError('My Error');
   expect(error.name).toBe('BotchedError');
-  expect(error.id).toMatch(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+  expect(error.id).toMatch(
+    /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+  );
   expect(error.code).toBe('BotchedError');
   expect(error.statusCode).toBe(500);
   expect(error.status).toBe('500');
@@ -26,8 +28,12 @@ it('should have sane defaults', () => {
 it('should generate unique ids', () => {
   const error1 = new BotchedError('My Error');
   const error2 = new BotchedError('My Error');
-  expect(error1.id).toMatch(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
-  expect(error2.id).toMatch(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+  expect(error1.id).toMatch(
+    /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+  );
+  expect(error2.id).toMatch(
+    /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+  );
   expect(error1.id).not.toEqual(error2.id);
 });
 it('should support additional data', () => {
@@ -87,7 +93,10 @@ it('should NOT inherit from the cause', () => {
     },
     'My Error',
   );
-  const error = new BotchedError({ cause: errorCause, id: 'my-new-id', statusCode: 400 }, 'My New Error');
+  const error = new BotchedError(
+    { cause: errorCause, id: 'my-new-id', statusCode: 400 },
+    'My New Error',
+  );
   expect(error.id).toBe('my-new-id');
   expect(error.code).toBe('BotchedError');
   expect(error.statusCode).toBe(400);
@@ -154,7 +163,9 @@ it('should work without error message', () => {
   const error = new BotchedError();
   expect(error.message).toBe('');
   expect(error.name).toBe('BotchedError');
-  expect(error.id).toMatch(/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i);
+  expect(error.id).toMatch(
+    /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i,
+  );
   expect(error.code).toBe('BotchedError');
   expect(error.title).toBe('Internal Server Error');
   expect(error.detail).toBe(undefined);
