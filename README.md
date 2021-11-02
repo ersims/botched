@@ -220,11 +220,9 @@ Returns true if the error is a [BotchedError](#api-botched-error).
 [npm-url]: https://npmjs.org/package/botched
 [npm-image]: https://img.shields.io/npm/v/botched.svg
 [github-ci-url]: https://github.com/ersims/botched/actions
-[github-ci-image]: https://img.shields.io/github/workflow/status/ersims/botched/Build%20and%20Test
+[github-ci-image]: https://img.shields.io/github/workflow/status/ersims/botched/Build%20and%20Test/main
 [snyk-url]: https://snyk.io/test/github/ersims/botched/main
 [snyk-image]: https://snyk.io/test/github/ersims/botched/main/badge.svg
-[renovate-url]: https://renovateapp.com/
-[renovate-image]: https://img.shields.io/badge/renovate-app-blue.svg
 [conventional-commits-image]: https://img.shields.io/badge/Conventional%20Commits-1.0.0-yellow.svg
 [conventional-commits-url]: https://conventionalcommits.org/
 [license-url]: https://github.com/ersims/botched/blob/main/LICENSE.md
