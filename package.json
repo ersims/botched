@@ -68,7 +68,7 @@
   },
   "devDependencies": {
     "@commitlint/cli": "^15.0.0",
-    "@commitlint/config-conventional": "^14.1.0",
+    "@commitlint/config-conventional": "^15.0.0",
     "@types/jest": "^27.0.2",
     "@types/node": "^16.11.6",
     "@types/uuid": "^8.3.1",
